@@ -8,23 +8,23 @@
    	: _num(T._num), _nom(T._nom), _compt(T._compt) {}
 
   phone& phone::operator=(const phone& T) throw(error) {
-  	if (this != &T) {
-	    _num = T._num;
-	    _nom = T._nom;
-	    _compt = T._compt;
-	}
+		if (this != &T) {
+			_num = T._num;
+			_nom = T._nom;
+			_compt = T._compt;
+		}
 	
-	return *this;
+		return *this;
   }
 
   phone::~phone() throw() {}
 
   nat phone::numero() const throw() {
-  	return _num;
+  		return _num;
   }
 
   string phone::nom() const throw() {
-  	return _nom;
+  		return _nom;
   }
 
   nat phone::frequencia() const throw() {
@@ -33,15 +33,15 @@
 
   phone& phone::operator++() throw() {
   
-    	_compt++;
-    	
-    	return *this;
+		_compt++;
+			
+		return *this;
     	
   }
 
   phone phone::operator++(int) throw() {
 
-    	phone p(*this);
+		phone p(*this);
     	_compt++;
     	
     	return p;
@@ -49,37 +49,36 @@
   }
 
   bool phone::operator==(const phone& T) const throw() {
-	return not *this != T;
+	  	return not *this != T;
   }
   
   bool phone::operator!=(const phone& T) const throw() {
-	if (_compt != T._compt) return true;
-	else return _nom != T._nom;
-	
+
+		if (_compt != T._compt) return true;
+		else return _nom != T._nom;
   }
   
   bool phone::operator<(const phone& T) const throw() {
-  
-	if (_compt < T._compt) return true;
-	else if (_compt == T._compt) return _nom < T._nom;
+
+	  	if (_compt < T._compt) return true;
+	  	else if (_compt == T._compt) return _nom < T._nom;
 	
-	return false;
+	  	return false;
   }
   
   bool phone::operator>(const phone& T) const throw() {
   
-	if (_compt > T._compt) return true;
-	else if (_compt == T._compt) return _nom > T._nom;
-	
-	return false;
-	
+		if (_compt > T._compt) return true;
+		else if (_compt == T._compt) return _nom > T._nom;
+		
+		return false;
   }
   
   bool phone::operator<=(const phone& T) const throw() {
-	return not *this > T;
+		return not *this > T;
   }
   
   bool phone::operator>=(const phone& T) const throw() {
-	return not *this < T;
+		return not *this < T;
   }
 
