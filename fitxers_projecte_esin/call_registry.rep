@@ -1,0 +1,20 @@
+//Call registry será un AVL de Phone.
+typedef unsigned int nat;
+
+struct node{
+    phone _tl;
+    node* _fesq;
+    node* _fdret;
+    nat _altura;
+    node(const phone &_tl, node* _fesq = nullptr, node* _fdret = nullptr, nat _altura) throw(error);
+};
+
+node *_arrel;
+
+static int altura(node *n);
+static int factor_equilibri(node *n);
+static node* cpyCallRegistry(node *n);
+static void deleteCallRegistry(node *n);
+static void findPhone(node *n, node* &p, nat num);
+static nat numNodes(node *n);
+static void inorder(node *n, vector<phone>& V);

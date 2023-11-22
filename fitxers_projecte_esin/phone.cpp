@@ -49,7 +49,7 @@
   }
 
   bool phone::operator==(const phone& T) const throw() {
-	  	return not *this != T;
+	  	return not (*this != T);
   }
   
   bool phone::operator!=(const phone& T) const throw() {
@@ -75,10 +75,10 @@
   }
   
   bool phone::operator<=(const phone& T) const throw() {
-		return not *this > T;
+		return not (*this > T);
   }
   
   bool phone::operator>=(const phone& T) const throw() {
-		return not *this < T;
+		return not (*this < T);
   }
 

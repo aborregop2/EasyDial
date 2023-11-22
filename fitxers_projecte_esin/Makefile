@@ -1,10 +1,10 @@
 OPTIONS = -std=c++14 -Wextra -Werror -Wno-sign-compare -O0 -ansi -Wall -Wno-deprecated  #-I $(CPLUS_INCLUDE_PATH) #-g?
 
-program.exe: program.o dialog.o easy_dial.o call_registry.o phone.o
-	g++ $(OPTIONS) -o programa.exe -L $(LIBRARY_PATH) -lesin
+driver_easydial.exe: driver_easydial.o dialog.o easy_dial.o call_registry.o phone.o
+	g++ $(OPTIONS) -o driver_easydial.exe -L $(LIBRARY_PATH) -lesin
 	
-programa.o: programa.cpp dialog.hpp easy_dial.hpp call_registry.hpp phone.hpp
-	g++ $(OPTIONS) -c programa.cpp
+driver_easydial.o: driver_easydial.cpp dialog.hpp easy_dial.hpp call_registry.hpp phone.hpp
+	g++ $(OPTIONS) -c driver_easydial.cpp
 	
 dialog.o: dialog.cpp dialog.hpp easy_dial.hpp call_registry.hpp phone.hpp
 	g++ $(OPTIONS) -c dialog.cpp 	
