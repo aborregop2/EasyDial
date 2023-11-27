@@ -6,15 +6,20 @@ struct node{
     node* _fesq;
     node* _fdret;
     nat _altura;
-    node(const phone &_tl, node* _fesq = nullptr, node* _fdret = nullptr, nat _altura) throw(error);
+    node(const phone &tl, node* fesq = nullptr, node* fdret = nullptr) throw(error);
 };
 
 node *_arrel;
+nat _size;
 
-static int altura(node *n);
+static nat altura(node *n);
 static int factor_equilibri(node *n);
+static node* rotacio_dreta(node *y);
+static node* rotacio_esquerra(node *x);
+static node* insereix(node *n, phone p);
+static node* esborra(node *n, nat num);
+
 static node* cpyCallRegistry(node *n);
 static void deleteCallRegistry(node *n);
 static void findPhone(node *n, node* &p, nat num);
-static nat numNodes(node *n);
 static void inorder(node *n, vector<phone>& V);

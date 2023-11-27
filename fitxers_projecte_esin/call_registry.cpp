@@ -1,11 +1,98 @@
 #include "call_registry.hpp"
+call_registry::node::node(const phone &tl, node* fesq, node* fdret) throw(error)
+    : _tl(tl), _fesq(fesq), _fdret(fdret), _altura(1){
 
-call_registry::call_registry() throw(error) : _arrel(nullptr) {}
+}
+
+nat call_registry::altura(node *n){
+    if (n == nullptr){
+        return 0;
+    }
+    return n->_altura;
+}
+
+int call_registry::factor_equilibri(node *n){
+    if (n == nullptr){
+        return 0;
+    }
+    return altura (n->_fesq) - altura(n->_fdret);
+}
+
+call_registry::node* call_registry::rotacio_dreta(node *y){
+    node *x = y->_fesq;
+    node *T2 = x->_fdret;
+
+    x->_fdret = y;
+    y->_fesq = T2;
+
+    y->_altura = max(altura(y->_fesq), altura(y->_fdret)) + 1;
+    x->_altura = max(altura(x->_fesq), altura(x->_fdret)) + 1;
+
+    return x;
+}
+
+
+call_registry::node* call_registry::rotacio_esquerra(node *x){
+    node *y = x->_fdret ;
+    node *T2 = y->_fesq ;
+
+    y->_fesq = x ;
+    x->_fdret = T2 ;
+
+    x->_altura = max(altura(x->_fesq), altura(x->_fdret)) + 1;
+    y->_altura = max(altura(y->_fesq), altura(y->_fdret)) + 1;
+
+    return y ;
+}
+
+call_registry::node* call_registry::insereix(node *n, phone p){
+    if (n == nullptr){
+        return new node(p);
+        
+    }
+    else if (p.numero() < n->_tl.numero()){
+        n->_fesq = insereix(n->_fesq, p);
+    }
+    else if (p.numero() > n->_tl.numero()){
+        n->_fdret = insereix(n->_fdret, p);
+    }
+    else{
+        n->_tl = p;
+        return n;
+    }
+
+    n->_altura = max(altura(n->_fesq), altura(n->_fdret)) + 1;
+
+    int fe = factor_equilibri(n);
+
+    if (fe > 1 and p.numero() < n->_fesq->_tl.numero()){
+        return rotacio_dreta(n);
+    }
+
+    if (fe < -1 and p.numero() > n->_fdret->_tl.numero()){
+        return rotacio_esquerra(n);
+    }
+
+    if (fe > 1 and p.numero() > n->_fesq->_tl.numero()){
+        n->_fesq = rotacio_esquerra(n->_fesq);
+        return rotacio_dreta(n);
+    }
+
+    if (fe < -1 and p.numero() < n->_fdret->_tl.numero()){
+        n->_fdret = rotacio_dreta(n->_fdret);
+        return rotacio_esquerra(n);
+    }
+    return n;
+}
+
+
+
+call_registry::call_registry() throw(error) : _arrel(nullptr), _size(0) {}
 
 call_registry::node* call_registry::cpyCallRegistry(node *n) {
     node *root = nullptr;
     if (n != nullptr) {
-        root = new node(n->_tl, nullptr, nullptr, n->_altura);
+        root = new node(n->_tl);
 
         node *esq = cpyCallRegistry(n->_fesq);
         node *dret = cpyCallRegistry(n->_fdret);
@@ -17,7 +104,7 @@ call_registry::node* call_registry::cpyCallRegistry(node *n) {
     return root;
 }
 
-call_registry::call_registry(const call_registry& R) throw(error) {
+call_registry::call_registry(const call_registry& R) throw(error) : _size(R._size) {
     _arrel = cpyCallRegistry(R._arrel);
 }
 
@@ -49,7 +136,9 @@ void call_registry::registra_trucada(nat num) throw(error) {
         p->_tl++;
     }
     else {
-        //Afegir node amb contador a 1, nom buit i num.
+        phone p(num, "", 1);
+        _arrel = insereix(_arrel, p);
+        ++_size;
     }
 }
 
@@ -62,12 +151,57 @@ void call_registry::assigna_nom(nat num, const string& name) throw(error) {
         p->_tl = pr;
     }
     else {
-        //Afegir node amb contador a 0, name i num.
+        phone p(num, name, 1);
+        _arrel = insereix(_arrel, p);
+        ++_size;        
     }
 }
 
-void call_registry::elimina(nat num) throw(error) {
+call_registry::node* call_registry::esborra(node *n, nat num){
 
+    if (n != nullptr){
+        if (num < n->_tl.numero()){
+            n->_fesq = esborra(n->_fesq, num);
+        }
+        else if (num > n->_tl.numero()){
+            n->_fdret = esborra(n->_fdret, num);
+        }
+        else{
+            //PORROOOOOOO
+            //Dos hijos, hijo izquierdo, hijo derecho y no hijos
+        }
+        n->_altura = max(altura(n->_fesq), altura(n->_fdret)) + 1;
+
+        int fe = factor_equilibri(n);
+
+        if (fe > 1 and num < n->_fesq->_tl.numero()){
+            return rotacio_dreta(n);
+        }
+
+        if (fe < -1 and num > n->_fdret->_tl.numero()){
+            return rotacio_esquerra(n);
+        }
+
+        if (fe > 1 and num > n->_fesq->_tl.numero()){
+            n->_fesq = rotacio_esquerra(n->_fesq);
+            return rotacio_dreta(n);
+        }
+
+        if (fe < -1 and num < n->_fdret->_tl.numero()){
+            n->_fdret = rotacio_dreta(n->_fdret);
+            return rotacio_esquerra(n);
+        }
+        return n;
+    }
+
+}
+
+
+
+void call_registry::elimina(nat num) throw(error) {
+    if (this->conte(num)){
+        _arrel = esborra(_arrel, num);
+    }
 }
 
 void call_registry::findPhone(node *n, node* &p, nat num) {
@@ -117,17 +251,13 @@ bool call_registry::es_buit() const throw() {
     return _arrel == nullptr;
 }
 
-nat call_registry::numNodes(node *n) {
-    if (n == nullptr) return 0;
-    return numNodes(n->_fesq) + 1 + numNodes(n->_fdret);
-}
-
 nat call_registry::num_entrades() const throw() {
-    return numNodes(_arrel);
+    return _size;
 }
 
 void call_registry::inorder(node *n, vector<phone>& V) {
     if (n != nullptr) {
+        //mirar tema de nombres
         inorder(n->_fesq, V);
         V.push_back(n->_tl);
         inorder(n->_fdret, V);
