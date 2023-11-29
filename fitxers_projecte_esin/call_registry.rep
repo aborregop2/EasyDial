@@ -1,5 +1,5 @@
 //Call registry será un AVL de Phone.
-typedef unsigned int nat;
+
 
 struct node{
     phone _tl;
@@ -18,6 +18,8 @@ static node* rotacio_dreta(node *y);
 static node* rotacio_esquerra(node *x);
 static node* insereix(node *n, phone p);
 static node* esborra(node *n, nat num);
+static node* ajunta ( node *n1 , node *n2 ) throw ();
+static node * elimina_maxim ( node * n) throw ();
 
 static node* cpyCallRegistry(node *n);
 static void deleteCallRegistry(node *n);

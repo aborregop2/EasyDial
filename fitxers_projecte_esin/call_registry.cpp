@@ -1,4 +1,5 @@
 #include "call_registry.hpp"
+
 call_registry::node::node(const phone &tl, node* fesq, node* fdret) throw(error)
     : _tl(tl), _fesq(fesq), _fdret(fdret), _altura(1){
 
@@ -157,6 +158,31 @@ void call_registry::assigna_nom(nat num, const string& name) throw(error) {
     }
 }
 
+call_registry::node* call_registry::elimina_maxim (node *n) throw (){
+    node * p_orig = n, *father= nullptr ;
+    while (n->_fdret != nullptr ) {
+        father = n;
+        n = n->_fdret ;    
+    }
+    if (father != nullptr) {
+        father->_fdret = n->_fesq ; 
+        n->_fesq = p_orig;
+    }
+    return n;
+}
+
+call_registry::node* call_registry::ajunta( node *n1 , node *n2 ) throw (){
+    if (n1 == nullptr) {
+        return n2;
+    }
+    if (n2 == nullptr) {
+        return n1;
+    }
+    node *p = elimina_maxim(n1);
+    p->_fdret = n2;
+    return p ;
+}
+
 call_registry::node* call_registry::esborra(node *n, nat num){
 
     if (n != nullptr){
@@ -167,8 +193,20 @@ call_registry::node* call_registry::esborra(node *n, nat num){
             n->_fdret = esborra(n->_fdret, num);
         }
         else{
-            //PORROOOOOOO
-            //Dos hijos, hijo izquierdo, hijo derecho y no hijos
+            node *p = n ;
+            if ( n != nullptr ) {
+                if ( num < n -> _tl.numero() ) {
+                    n->_fesq = esborra(n->_fesq, num);
+                }
+                else if (num > n -> _tl.numero() ) {
+                    n->_fdret = esborra(n->_fdret, num);
+                }
+                else {
+                    n = ajunta(n->_fesq , n->_fdret);
+                    delete (p);
+                }
+            }
+
         }
         n->_altura = max(altura(n->_fesq), altura(n->_fdret)) + 1;
 
@@ -191,8 +229,8 @@ call_registry::node* call_registry::esborra(node *n, nat num){
             n->_fdret = rotacio_dreta(n->_fdret);
             return rotacio_esquerra(n);
         }
-        return n;
     }
+        return n;
 
 }
 
@@ -201,6 +239,10 @@ call_registry::node* call_registry::esborra(node *n, nat num){
 void call_registry::elimina(nat num) throw(error) {
     if (this->conte(num)){
         _arrel = esborra(_arrel, num);
+        --_size;
+    }
+    else{
+        throw error(ErrNumeroInexistent); 
     }
 }
 
@@ -231,7 +273,7 @@ string call_registry::nom(nat num) const throw(error) {
         return p->_tl.nom();
     }
     else {
-
+       throw error(ErrNumeroInexistent); 
     }
 }
 
@@ -243,7 +285,7 @@ nat call_registry::num_trucades(nat num) const throw(error) {
         return p->_tl.frequencia();
     }
     else {
-
+        throw error(ErrNumeroInexistent); 
     }
 }
 
@@ -267,4 +309,5 @@ void call_registry::inorder(node *n, vector<phone>& V) {
 
 void call_registry::dump(vector<phone>& V) const throw(error) {
     inorder(_arrel, V);
+    //ordenar por nombre y revisar que no se repitan nombres throw erroe(nomrepetit)
 }

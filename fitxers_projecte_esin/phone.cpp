@@ -1,7 +1,10 @@
 #include "phone.hpp"
 
 
-  phone::phone(nat num=0, const string& name="", nat compt=0) throw(error) 
+
+  
+
+  phone::phone(nat num, const string& name, nat compt) throw(error) 
   	: _num(num), _nom(name), _compt(compt) {}
 
   phone::phone(const phone& T) throw(error)

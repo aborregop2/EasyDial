@@ -1,4 +1,4 @@
-OPTIONS = -std=c++14 -Wextra -Werror -Wno-sign-compare -O0 -ansi -Wall -Wno-deprecated  #-I $(CPLUS_INCLUDE_PATH) #-g?
+OPTIONS = -std=c++11 -Wextra -Werror -Wno-sign-compare -O0 -Wall -Wno-deprecated  #-I $(CPLUS_INCLUDE_PATH) #-g?
 
 driver_easydial.exe: driver_easydial.o dialog.o easy_dial.o call_registry.o phone.o
 	g++ $(OPTIONS) -o driver_easydial.exe -L $(LIBRARY_PATH) -lesin
