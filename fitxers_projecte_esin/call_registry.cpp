@@ -299,15 +299,19 @@ nat call_registry::num_entrades() const throw() {
 
 void call_registry::inorder(node *n, vector<phone>& V) {
     if (n != nullptr) {
-        //mirar tema de nombres
         inorder(n->_fesq, V);
-        V.push_back(n->_tl);
+        if (n->_tl.nom() != "") {
+            V.push_back(n->_tl);
+        }
         inorder(n->_fdret, V);
     }
 }
 
+void call_registry::quickSortNoms(vector<phone> &V){
+
+} 
 
 void call_registry::dump(vector<phone>& V) const throw(error) {
     inorder(_arrel, V);
-    //ordenar por nombre y revisar que no se repitan nombres throw erroe(nomrepetit)
+    //Queda ordenar por nombres   
 }
