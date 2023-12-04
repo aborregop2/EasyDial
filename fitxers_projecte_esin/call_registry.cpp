@@ -198,29 +198,30 @@ call_registry::node* call_registry::esborra(node *n, nat num){
             delete (p);
             
         }
-
-        
+  
     }
-        n->_altura = max(altura(n->_fesq), altura(n->_fdret)) + 1;
+        if (n != nullptr){
+            n->_altura = max(altura(n->_fesq), altura(n->_fdret)) + 1;
 
-        int fe = factor_equilibri(n);
+            int fe = factor_equilibri(n);
 
-        if (fe > 1 and num < n->_fesq->_tl.numero()){
-            return rotacio_dreta(n);
-        }
+            if (fe > 1 and num < n->_fesq->_tl.numero()){
+                return rotacio_dreta(n);
+            }
 
-        if (fe < -1 and num > n->_fdret->_tl.numero()){
-            return rotacio_esquerra(n);
-        }
+            if (fe < -1 and num > n->_fdret->_tl.numero()){
+                return rotacio_esquerra(n);
+            }
 
-        if (fe > 1 and num > n->_fesq->_tl.numero()){
-            n->_fesq = rotacio_esquerra(n->_fesq);
-            return rotacio_dreta(n);
-        }
+            if (fe > 1 and num > n->_fesq->_tl.numero()){
+                n->_fesq = rotacio_esquerra(n->_fesq);
+                return rotacio_dreta(n);
+            }
 
-        if (fe < -1 and num < n->_fdret->_tl.numero()){
-            n->_fdret = rotacio_dreta(n->_fdret);
-            return rotacio_esquerra(n);
+            if (fe < -1 and num < n->_fdret->_tl.numero()){
+                n->_fdret = rotacio_dreta(n->_fdret);
+                return rotacio_esquerra(n);
+            }
         }
         return n;
     }
