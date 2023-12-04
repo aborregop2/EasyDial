@@ -194,20 +194,13 @@ call_registry::node* call_registry::esborra(node *n, nat num){
         }
         else{
             node *p = n ;
-            if ( n != nullptr ) {
-                if ( num < n -> _tl.numero() ) {
-                    n->_fesq = esborra(n->_fesq, num);
-                }
-                else if (num > n -> _tl.numero() ) {
-                    n->_fdret = esborra(n->_fdret, num);
-                }
-                else {
-                    n = ajunta(n->_fesq , n->_fdret);
-                    delete (p);
-                }
-            }
-
+            n = ajunta(n->_fesq , n->_fdret);
+            delete (p);
+            
         }
+
+        
+    }
         n->_altura = max(altura(n->_fesq), altura(n->_fdret)) + 1;
 
         int fe = factor_equilibri(n);
@@ -229,10 +222,10 @@ call_registry::node* call_registry::esborra(node *n, nat num){
             n->_fdret = rotacio_dreta(n->_fdret);
             return rotacio_esquerra(n);
         }
-    }
         return n;
+    }
 
-}
+
 
 
 
@@ -242,7 +235,7 @@ void call_registry::elimina(nat num) throw(error) {
         --_size;
     }
     else{
-        throw error(ErrNumeroInexistent); 
+        throw error(ErrNumeroInexistent, "call_registry", "Numero inexistent"); 
     }
 }
 
@@ -273,7 +266,7 @@ string call_registry::nom(nat num) const throw(error) {
         return p->_tl.nom();
     }
     else {
-       throw error(ErrNumeroInexistent); 
+       throw error(ErrNumeroInexistent, "call_registry", "Numero inexistent."); 
     }
 }
 
@@ -307,11 +300,63 @@ void call_registry::inorder(node *n, vector<phone>& V) {
     }
 }
 
-void call_registry::quickSortNoms(vector<phone> &V){
+void call_registry:: mergeSortNoms(vector<phone> &V){
+    if(V.size() > 1){
+        int half = V.size()/2;
+        vector<phone> vleft;
+        for(unsigned int i = 0; i < half; ++i){
+            vleft.push_back(V[i]);
+        }
+        vector<phone> vright;
+        for(unsigned int i = half; i < V.size(); ++i){
+            vright.push_back(V[i]);
+        }
 
+        mergeSortNoms(vleft);
+        mergeSortNoms(vright);
+
+        unsigned int i = 0, j = 0, k = 0;
+    
+
+        while(i < vleft.size() and j < vleft.size()){
+            if (vleft[i].nom() < vright[j].nom()){
+                V[k] = vleft[i];
+                ++i;
+            }
+            else{
+                V[k] = vright[j];
+                ++j;
+            }
+            k++;
+        }
+        
+        while (i < vleft.size()){
+            V[k] = vleft[i];
+            ++i;
+            ++k;
+        }
+
+
+        while (j < vright.size()){
+            V[k] = vright[j];
+            ++j;
+            ++k;
+        }
+
+    }
 } 
 
 void call_registry::dump(vector<phone>& V) const throw(error) {
     inorder(_arrel, V);
-    //Queda ordenar por nombres   
+    mergeSortNoms(V);
+    bool iguals = false;
+    for (unsigned int i = 1; i < V.size() and not iguals; ++i) {
+        if (V[i].nom() == V[i-1].nom()) {
+            iguals = true;
+        }
+    }
+
+    if (iguals){
+        throw error(ErrNomRepetit, "call_registry", "Nom Repetit.");
+    }
 }

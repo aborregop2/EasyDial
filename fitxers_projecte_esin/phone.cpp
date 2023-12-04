@@ -5,7 +5,13 @@
   
 
   phone::phone(nat num, const string& name, nat compt) throw(error) 
-  	: _num(num), _nom(name), _compt(compt) {}
+  	: _num(num), _nom(name), _compt(compt) {
+      for(unsigned int i = 0; i < name.size(); ++i){
+        if (name[i] == DELETECHAR or name[i] == ENDCHAR or name[i] == ENDPREF){
+          throw error(ErrNomIncorrecte, "phone", "Nom incorrecte.");
+        }
+      }
+    }
 
   phone::phone(const phone& T) throw(error)
    	: _num(T._num), _nom(T._nom), _compt(T._compt) {}

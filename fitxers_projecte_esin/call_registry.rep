@@ -1,8 +1,7 @@
 //Call registry será un AVL de Phone.
 
-
 struct node{
-    phone _tl;
+    phone _tl;  
     node* _fesq;
     node* _fdret;
     nat _altura;
@@ -25,4 +24,5 @@ static node* cpyCallRegistry(node *n);
 static void deleteCallRegistry(node *n);
 static void findPhone(node *n, node* &p, nat num);
 static void inorder(node *n, vector<phone>& V);
+static void mergeSortNoms(vector<phone> &V);
    
