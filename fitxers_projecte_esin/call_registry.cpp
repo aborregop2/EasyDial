@@ -21,13 +21,16 @@ int call_registry::factor_equilibri(node *n){
 
 call_registry::node* call_registry::rotacio_dreta(node *y){
     node *x = y->_fesq;
-    node *T2 = x->_fdret;
+    if (x != nullptr){
+        node *T2 = x->_fdret;
 
-    x->_fdret = y;
-    y->_fesq = T2;
+        x->_fdret = y;
+        y->_fesq = T2;
 
-    y->_altura = max(altura(y->_fesq), altura(y->_fdret)) + 1;
-    x->_altura = max(altura(x->_fesq), altura(x->_fdret)) + 1;
+        x->_altura = max(altura(x->_fesq), altura(x->_fdret)) + 1;
+    }
+    
+        y->_altura = max(altura(y->_fesq), altura(y->_fdret)) + 1;
 
     return x;
 }
@@ -35,14 +38,15 @@ call_registry::node* call_registry::rotacio_dreta(node *y){
 
 call_registry::node* call_registry::rotacio_esquerra(node *x){
     node *y = x->_fdret ;
-    node *T2 = y->_fesq ;
+    if (y != nullptr){
+        node *T2 = y->_fesq ;
 
-    y->_fesq = x ;
-    x->_fdret = T2 ;
+        y->_fesq = x ;
+        x->_fdret = T2;
 
-    x->_altura = max(altura(x->_fesq), altura(x->_fdret)) + 1;
-    y->_altura = max(altura(y->_fesq), altura(y->_fdret)) + 1;
-
+        y->_altura = max(altura(y->_fesq), altura(y->_fdret)) + 1;
+    }
+        x->_altura = max(altura(x->_fesq), altura(x->_fdret)) + 1;
     return y ;
 }
 
@@ -134,7 +138,7 @@ void call_registry::registra_trucada(nat num) throw(error) {
     if (this->conte(num)) {
         node *p = nullptr;
         findPhone(_arrel, p, num);
-        p->_tl++;
+        ++(p->_tl);
     }
     else {
         phone p(num, "", 1);
@@ -152,7 +156,7 @@ void call_registry::assigna_nom(nat num, const string& name) throw(error) {
         p->_tl = pr;
     }
     else {
-        phone p(num, name, 1);
+        phone p(num, name, 0);
         _arrel = insereix(_arrel, p);
         ++_size;        
     }
@@ -236,17 +240,17 @@ void call_registry::elimina(nat num) throw(error) {
         --_size;
     }
     else{
-        throw error(ErrNumeroInexistent, "call_registry", "Numero inexistent"); 
+        throw error(ErrNumeroInexistent); 
     }
 }
 
 void call_registry::findPhone(node *n, node* &p, nat num) {
     if (n != nullptr and p == nullptr) {
         if (n->_tl.numero() < num) {
-            findPhone(n->_fesq, p, num);
+            findPhone(n->_fdret, p, num);
         }
         else if (n->_tl.numero() > num) {
-            findPhone(n->_fdret, p, num);
+            findPhone(n->_fesq, p, num);
         }
         else p = n;
     }
@@ -267,7 +271,7 @@ string call_registry::nom(nat num) const throw(error) {
         return p->_tl.nom();
     }
     else {
-       throw error(ErrNumeroInexistent, "call_registry", "Numero inexistent."); 
+       throw error(ErrNumeroInexistent); 
     }
 }
 
@@ -358,6 +362,6 @@ void call_registry::dump(vector<phone>& V) const throw(error) {
     }
 
     if (iguals){
-        throw error(ErrNomRepetit, "call_registry", "Nom Repetit.");
+        throw error(ErrNomRepetit);
     }
 }

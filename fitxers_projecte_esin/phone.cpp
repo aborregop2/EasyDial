@@ -1,14 +1,10 @@
 #include "phone.hpp"
 
-
-
-  
-
   phone::phone(nat num, const string& name, nat compt) throw(error) 
   	: _num(num), _nom(name), _compt(compt) {
       for(unsigned int i = 0; i < name.size(); ++i){
         if (name[i] == DELETECHAR or name[i] == ENDCHAR or name[i] == ENDPREF){
-          throw error(ErrNomIncorrecte, "phone", "Nom incorrecte.");
+          throw error(ErrNomIncorrecte);
         }
       }
     }
