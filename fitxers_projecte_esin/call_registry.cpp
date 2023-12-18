@@ -193,18 +193,7 @@ void call_registry::recalcula_altures(node *p){
     if (p != nullptr){
         recalcula_altures(p->_fesq);
         recalcula_altures(p->_fdret);
-        if (p->_fesq == nullptr and p->_fdret == nullptr){
-            p->_altura = 1;
-        }
-        else if (p->_fesq == nullptr){
-            p->_altura = p->_fdret->_altura + 1;
-        }
-        else if (p->_fdret == nullptr){
-            p->_altura = p->_fesq->_altura + 1;
-        }
-        else{
-            p->_altura = max(p->_fesq->_altura, p->_fdret->_altura) + 1;
-        }
+        p->_altura = max(altura(p->_fesq), altura(p->_fdret)) + 1;
     }
 }
  
@@ -221,7 +210,7 @@ call_registry::node* call_registry::esborra(node *n, nat num){
             node *p = n;
             n = ajunta(n->_fesq , n->_fdret);
             delete (p);
-            recalcula_altures(n);
+            recalcula_altures(n->_fesq);
             
         }
   
