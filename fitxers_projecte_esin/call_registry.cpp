@@ -1,5 +1,7 @@
 #include "call_registry.hpp"
 
+call_registry::call_registry() throw(error) : _arrel(nullptr), _size(0) {}
+
 call_registry::node::node(const phone &tl, node* fesq, node* fdret) throw(error)
     : _tl(tl), _fesq(fesq), _fdret(fdret), _altura(1){
 
@@ -92,7 +94,6 @@ call_registry::node* call_registry::insereix(node *n, phone p){
 
 
 
-call_registry::call_registry() throw(error) : _arrel(nullptr), _size(0) {}
 
 call_registry::node* call_registry::cpyCallRegistry(node *n) {
     node *root = nullptr;
@@ -166,12 +167,13 @@ call_registry::node* call_registry::elimina_maxim (node *n) throw (){
     node * p_orig = n, *father= nullptr ;
     while (n->_fdret != nullptr ) {
         father = n;
-        n = n->_fdret ;    
+        n = n->_fdret;
     }
     if (father != nullptr) {
         father->_fdret = n->_fesq ; 
         n->_fesq = p_orig;
     }
+    
     return n;
 }
 
@@ -197,7 +199,7 @@ call_registry::node* call_registry::esborra(node *n, nat num){
             n->_fdret = esborra(n->_fdret, num);
         }
         else{
-            node *p = n ;
+            node *p = n;
             n = ajunta(n->_fesq , n->_fdret);
             delete (p);
             
