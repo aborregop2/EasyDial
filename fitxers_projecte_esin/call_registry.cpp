@@ -196,7 +196,15 @@ void call_registry::recalcula_altures(node *p){
         if (p->_fesq == nullptr and p->_fdret == nullptr){
             p->_altura = 1;
         }
-        else if (p->_fesq == nullptr and p->_)
+        else if (p->_fesq == nullptr){
+            p->_altura = p->_fdret->_altura + 1;
+        }
+        else if (p->_fdret == nullptr){
+            p->_altura = p->_fesq->_altura + 1;
+        }
+        else{
+            p->_altura = max(p->_fesq->_altura, p->_fdret->_altura) + 1;
+        }
     }
 }
  
