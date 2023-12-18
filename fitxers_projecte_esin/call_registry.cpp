@@ -189,6 +189,17 @@ call_registry::node* call_registry::ajunta( node *n1 , node *n2 ) throw (){
     return p ;
 }
 
+void call_registry::recalcula_altures(node *p){
+    if (p != nullptr){
+        recalcula_altures(p->_fesq);
+        recalcula_altures(p->_fdret);
+        if (p->_fesq == nullptr and p->_fdret == nullptr){
+            p->_altura = 1;
+        }
+        else if (p->_fesq == nullptr and p->_)
+    }
+}
+ 
 call_registry::node* call_registry::esborra(node *n, nat num){
 
     if (n != nullptr){
@@ -202,6 +213,7 @@ call_registry::node* call_registry::esborra(node *n, nat num){
             node *p = n;
             n = ajunta(n->_fesq , n->_fdret);
             delete (p);
+            recalcula_altures(n);
             
         }
   
