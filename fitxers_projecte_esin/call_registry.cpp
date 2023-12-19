@@ -30,11 +30,11 @@ call_registry::node* call_registry::rotacio_dreta(node *y){
         y->_fesq = T2;
 
         x->_altura = max(altura(x->_fesq), altura(x->_fdret)) + 1;
-    }
-    
         y->_altura = max(altura(y->_fesq), altura(y->_fdret)) + 1;
 
-    return x;
+        return x;
+    }
+    return y;
 }
 
 
@@ -47,9 +47,10 @@ call_registry::node* call_registry::rotacio_esquerra(node *x){
         x->_fdret = T2;
 
         y->_altura = max(altura(y->_fesq), altura(y->_fdret)) + 1;
-    }
         x->_altura = max(altura(x->_fesq), altura(x->_fdret)) + 1;
-    return y ;
+        return y;
+    }
+    return x;
 }
 
 call_registry::node* call_registry::insereix(node *n, phone p){
@@ -105,6 +106,7 @@ call_registry::node* call_registry::cpyCallRegistry(node *n) {
 
         root->_fesq = esq;
         root->_fdret = dret;
+       
     }
 
     return root;
@@ -112,13 +114,14 @@ call_registry::node* call_registry::cpyCallRegistry(node *n) {
 
 call_registry::call_registry(const call_registry& R) throw(error) : _size(R._size) {
     _arrel = cpyCallRegistry(R._arrel);
+     _size = R._size;
 }
 
 call_registry& call_registry::operator=(const call_registry& R) throw(error) {
     if (this != &R) {
         _arrel = cpyCallRegistry(R._arrel);
     }
-
+    _size = R._size;
     return *this;
 }
 
@@ -210,8 +213,9 @@ call_registry::node* call_registry::esborra(node *n, nat num){
             node *p = n;
             n = ajunta(n->_fesq , n->_fdret);
             delete (p);
-            recalcula_altures(n->_fesq);
-            
+            if (n != nullptr){
+                recalcula_altures(n->_fesq);
+            }
         }
   
     }
