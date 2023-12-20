@@ -25,4 +25,5 @@ static void deleteCallRegistry(node *n);
 static void findPhone(node *n, node* &p, nat num);
 static void inorder(node *n, vector<phone>& V);
 static void mergeSortNoms(vector<phone> &V);
-static void recalcula_altures(node *p);   
+static void recalcula_altures(node *p);
+

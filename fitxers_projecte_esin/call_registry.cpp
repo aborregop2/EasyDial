@@ -380,3 +380,4 @@ void call_registry::dump(vector<phone>& V) const throw(error) {
         throw error(ErrNomRepetit);
     }
 }
+
