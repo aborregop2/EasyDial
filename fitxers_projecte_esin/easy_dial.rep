@@ -8,16 +8,13 @@ struct node {
        node* _dre; // Fill dret, apunta a símbols mateixa posició formant un BST
        bool _visitat;
        node(const char &c, node* esq = nullptr, node* cen = nullptr, node* dre = nullptr, bool v = false) throw(error);
-     };
+};
      node* _arrel;
      string pref_curs;
      bool indefinit;
      int size;
      int seg;
-     
 
- 
-     
      
      static node* insereix(node *t, nat i, const string &k, phone ph);
 
@@ -33,3 +30,7 @@ struct node {
      static void recorregutnoms(node *pt, vector<string> &result);
      
      static void mergeSortNom(vector<string> &V);
+
+     static void resVisitat(node *pt);
+
+     static void totesFreq(node *pt, nat f[], int &i);
