@@ -6,10 +6,15 @@ struct node {
        node* _esq; // Fill esquerra, apunta a símbols mateixa posició formant un BST
        node* _cen; // Fill central, apunta a símbols següent posició
        node* _dre; // Fill dret, apunta a símbols mateixa posició formant un BST
-       node(const char &c, node* esq = nullptr, node* cen = nullptr, node* dre = nullptr) throw(error);
+       bool _visitat;
+       node(const char &c, node* esq = nullptr, node* cen = nullptr, node* dre = nullptr, bool v = false) throw(error);
      };
      node* _arrel;
      string pref_curs;
+     bool indefinit;
+     int size;
+     int seg;
+     
 
  
      
@@ -18,4 +23,13 @@ struct node {
 
      static node* cpyeasydial(node *p);
 
-    static void delete_easy_dial(node *p);
+     static void delete_easy_dial(node *p);
+     
+     static void F(node* S, phone &ph); //Hay que probar las inicializaciones
+
+
+     static void fistring(node *S, string p, node* &pt, int i = 0);
+
+     static void recorregutnoms(node *pt, vector<string> &result);
+     
+     static void mergeSortNom(vector<string> &V);
