@@ -13,16 +13,17 @@ struct node {
      string pref_curs;
      bool indefinit;
      int size;
-     int seg;
+     phone phoneMAX;
+     double *arrayFreqs;
 
      
-     static node* insereix(node *t, nat i, const string &k, phone ph);
+     node* insereix(node *t, nat i, const string &k, phone ph);
 
      static node* cpyeasydial(node *p);
 
      static void delete_easy_dial(node *p);
      
-     static void F(node* S, phone &ph); //Hay que probar las inicializaciones
+     static void F(node* S, phone &ph, node *&aux); //Hay que probar las inicializaciones
 
 
      static void fistring(node *S, string p, node* &pt, int i = 0);
@@ -33,4 +34,6 @@ struct node {
 
      static void resVisitat(node *pt);
 
-     static void totesFreq(node *pt, nat f[], int &i);
+     
+
+     static void menorFreqT(node *p, node *&f, phone &min);
