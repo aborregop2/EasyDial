@@ -12,8 +12,10 @@ struct node {
      node* _arrel;
      string pref_curs;
      bool indefinit;
+     bool sb;
      int size;
      phone phoneMAX;
+     phone phoneANT;
      double *arrayFreqs;
 
      
