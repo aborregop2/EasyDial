@@ -244,19 +244,24 @@ string easy_dial::seguent(char c) throw(error){
 
         
         fistring(_arrel, pref_curs, pt);
+        if (c == '\0'){
+            if (pt != nullptr and pt->_p.nom() != "" and not pt->_visitat){
+                phoneANT = pt->_p;
+                pt->_visitat = true;
+                return pt->_p.nom();
+            } 
+        }
+
 
         if (pt == nullptr){
             indefinit = true;
             throw error(ErrPrefixIndef);
         }
     }
-    
-
+ 
     pref_curs  += c;
     pt = nullptr;
-    fistring(_arrel, pref_curs, pt);  
-  
-  
+    fistring(_arrel, pref_curs, pt);
     
     
     if (pt == nullptr and (size == 0 or sb == true)){
@@ -293,9 +298,6 @@ string easy_dial::seguent(char c) throw(error){
         throw error(ErrPrefixIndef);
     }
 
-    if (ph.nom() == ""){
-        phoneANTaux = phoneANT;
-    }
     phoneANT = ph;
 
     if (c == '\0'){
@@ -361,7 +363,14 @@ string easy_dial::anterior() throw(error){
     pref_curs.pop_back();
 
     if (pref_curs == ""){
-        return phoneMAX.nom();
+        phone aux = phoneMAX;
+        menorFreqT(_arrel, minT, aux);
+        if (minT != nullptr){
+            return minT->_p.nom();
+        }
+        else{
+            return phoneMAX.nom();
+        }
     }
 
     fistring(_arrel, pref_curs, pt);
@@ -376,6 +385,7 @@ string easy_dial::anterior() throw(error){
     menorFreqT(pt, minT, q2);
 
     sb = false;
+    phoneANT = minT->_p;
     return minT->_p.nom();
 
 }
