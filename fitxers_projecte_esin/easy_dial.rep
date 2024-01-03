@@ -17,6 +17,7 @@ struct node {
      phone phoneMAX;
      phone phoneANT;
      double *arrayFreqs;
+   
 
      
      node* insereix(node *t, nat i, const string &k, phone ph);
@@ -36,6 +37,44 @@ struct node {
 
      static void resVisitat(node *pt);
 
-     
-
      static void menorFreqT(node *p, node *&f, phone &min);
+
+     /*
+     #init rc call_registry
+#assigna_nom 1001 MARIA
+#assigna_nom 1002 JOSEP
+#assigna_nom 1003 MAR
+#assigna_nom 1004 MIQUEL
+#assigna_nom 1005 MARTA
+#assigna_nom 1006 JO
+#assigna_nom 1007 JOVANNA
+#assigna_nom 1008 JESUS
+#assigna_nom 1009 JACINT
+#assigna_nom 1010 JESULIN
+#registra 1001
+#registra 1001
+#registra 1001
+#registra 1002
+#registra 1002
+#registra 1002
+#registra 1002
+#registra 1002
+#registra 1003
+#registra 1004
+#registra 1004
+#registra 1004
+#registra 1004
+#registra 1005
+#registra 1005
+#registra 1006
+#registra 1006
+#registra 1006
+#registra 1006
+#registra 1007
+#registra 1007
+#registra 1007
+#registra 1008
+#registra 1008
+#registra 1009
+#registra 1010
+     */

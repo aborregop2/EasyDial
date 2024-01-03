@@ -93,6 +93,7 @@ easy_dial::easy_dial(const call_registry& R) throw(error){
     _arrel = nullptr;
     indefinit = true;
     sb = false;
+ 
     
     R.dump(v);
     mergeSortFreq(v);
@@ -258,10 +259,12 @@ string easy_dial::seguent(char c) throw(error){
             throw error(ErrPrefixIndef);
         }
     }
- 
-    pref_curs  += c;
+    pref_curs += c;
+    
     pt = nullptr;
+    
     fistring(_arrel, pref_curs, pt);
+    
     
     
     if (pt == nullptr and (size == 0 or sb == true)){
@@ -270,7 +273,7 @@ string easy_dial::seguent(char c) throw(error){
     }
     else if (pt == nullptr){
         sb = true;
-        return "";
+        return "";  //<- entra aqui
     }
     
     node* aux = nullptr;
@@ -305,6 +308,7 @@ string easy_dial::seguent(char c) throw(error){
             aux->_visitat = false;
         }
         if (pt->_p.nom() != "" and not pt->_visitat){
+        
             return pt->_p.nom();
         }
         else{
@@ -338,13 +342,21 @@ string easy_dial::anterior() throw(error){
         throw error(ErrPrefixIndef);
     }
 
+    
+
     if (pref_curs == ""){
-        indefinit = true;
-        throw error(ErrNoHiHaAnterior);
+        if (phoneMAX == phoneANT){
+            indefinit = true;
+            throw error(ErrNoHiHaAnterior);
+        }  
+        else{
+            phoneANT = phoneMAX;
+            return phoneMAX.nom();
+        } 
     }
-
-
    
+
+    
 
     fistring(_arrel, pref_curs, pt);
     phone q = phoneMAX;
@@ -361,14 +373,18 @@ string easy_dial::anterior() throw(error){
    
 
     pref_curs.pop_back();
+    
+   
 
     if (pref_curs == ""){
         phone aux = phoneMAX;
         menorFreqT(_arrel, minT, aux);
         if (minT != nullptr){
+            phoneANT = minT->_p;
             return minT->_p.nom();
         }
         else{
+            phoneANT = phoneMAX;
             return phoneMAX.nom();
         }
     }
@@ -396,7 +412,7 @@ nat easy_dial::num_telf() const throw(error){
     if (indefinit){
         throw error(ErrPrefixIndef);
     }
-
+    
     node *pt = nullptr;
 
     fistring(_arrel, pref_curs, pt);
@@ -411,8 +427,23 @@ nat easy_dial::num_telf() const throw(error){
         F(pt->_cen, ph, aux);
     }
    
+    
+
     if (pref_curs == ""){
-        return phoneMAX.numero();
+        if(phoneMAX != phoneANT){
+            phone aux = phoneMAX;
+            node *minT = nullptr;
+            menorFreqT(_arrel, minT, aux);
+            if (minT != nullptr){
+                return minT->_p.numero();
+            }
+            else{
+                return phoneMAX.numero();
+            }   
+        }
+        else{
+            return phoneMAX.numero();
+        }
     }
 
     if (aux == nullptr and phoneANT.nom() == ""){
