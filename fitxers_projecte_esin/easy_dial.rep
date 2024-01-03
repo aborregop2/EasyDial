@@ -16,6 +16,7 @@ struct node {
      int size;
      phone phoneMAX;
      phone phoneANT;
+     phone phoneANTaux;
      double *arrayFreqs;
 
      
