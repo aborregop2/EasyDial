@@ -18,7 +18,7 @@ void mergeSortFreq(vector<phone> &V){
         unsigned int i = 0, j = 0, k = 0;
     
 
-        while(i < vleft.size() and j < vleft.size()){
+        while(i < vleft.size() and j < vright.size()){
             if (vleft[i].frequencia() > vright[j].frequencia()){
                 V[k] = vleft[i];
                 ++i;
@@ -93,6 +93,7 @@ easy_dial::easy_dial(const call_registry& R) throw(error){
     _arrel = nullptr;
     indefinit = true;
     sb = false;
+    fiprefZ = false;
  
     
     R.dump(v);
@@ -102,13 +103,18 @@ easy_dial::easy_dial(const call_registry& R) throw(error){
 
     size = v.size();
 
-    double *ptr = new double[v.size()];
+    phone *ptr = new phone[v.size()];
 
     for (int i = 0; i < v.size(); ++i){
-        ptr[i] = v[i].frequencia();
+        ptr[i] = v[i];
     }
+ 
 
     arrayFreqs = ptr;
+
+    
+
+
     
     if (v.size() != 0){
          phoneMAX = v[0];
@@ -121,6 +127,53 @@ easy_dial::easy_dial(const call_registry& R) throw(error){
         _arrel = insereix(_arrel, j, v[i].nom(), v[i]);
     }
    
+   
+    indefinit = false;
+
+    int *ptrp = new int[size];
+    bool trobat;
+    string auxiliar;
+    
+    for (unsigned int i = 0; i < size; ++i){
+        pref_curs = "";
+        trobat = false;
+        phone ph;
+        node* aux;
+        F(_arrel, ph, aux);
+        aux->_visitat = true;
+        auxiliar = ph.nom();
+        
+
+        for (unsigned int j = 0; j <= arrayFreqs[i].nom().size() and not trobat; ++j){
+            if (auxiliar == arrayFreqs[i].nom()){
+                ptrp[i] = pref_curs.size();
+                trobat = true;
+            }
+            else{
+                if(pref_curs.size() == arrayFreqs[i].nom().size()){
+                    ptrp[i] = pref_curs.size() + 1;
+                    trobat = true;
+                }
+                else{
+                    auxiliar = (this->seguent(arrayFreqs[i].nom()[j]));
+                }
+            }
+            
+        }
+        
+        pref_curs = "";
+        indefinit = false;
+        sb = false;
+        fiprefZ = false;
+        resVisitat(_arrel);
+
+    }
+
+    indefinit = true;
+
+    pulsacions = ptrp;
+    
+    
 
 }
 
@@ -176,6 +229,7 @@ string easy_dial::inici() throw(){
     pref_curs = "";
     indefinit = false;
     sb = false;
+    fiprefZ = false;
     resVisitat(_arrel);
 
     
@@ -249,6 +303,7 @@ string easy_dial::seguent(char c) throw(error){
             if (pt != nullptr and pt->_p.nom() != "" and not pt->_visitat){
                 phoneANT = pt->_p;
                 pt->_visitat = true;
+                fiprefZ = true;
                 return pt->_p.nom();
             } 
         }
@@ -256,10 +311,19 @@ string easy_dial::seguent(char c) throw(error){
 
         if (pt == nullptr){
             indefinit = true;
+        
             throw error(ErrPrefixIndef);
         }
     }
+
+    if (fiprefZ){
+        fiprefZ = false;
+    }
+
+   
     pref_curs += c;
+
+
     
     pt = nullptr;
     
@@ -303,18 +367,6 @@ string easy_dial::seguent(char c) throw(error){
 
     phoneANT = ph;
 
-    if (c == '\0'){
-        if (aux != nullptr){
-            aux->_visitat = false;
-        }
-        if (pt->_p.nom() != "" and not pt->_visitat){
-        
-            return pt->_p.nom();
-        }
-        else{
-            return "";
-        }
-    }
     return ph.nom();
 }
 
@@ -371,9 +423,12 @@ string easy_dial::anterior() throw(error){
     
   
    
-
-    pref_curs.pop_back();
-    
+    if (fiprefZ){
+        fiprefZ = false;
+    }
+    else{
+        pref_curs.pop_back();
+    }
    
 
     if (pref_curs == ""){
@@ -392,7 +447,7 @@ string easy_dial::anterior() throw(error){
     fistring(_arrel, pref_curs, pt);
 
 
-    if (pt == nullptr){
+    if (pt == nullptr){   
         indefinit = true;
         throw error(ErrPrefixIndef);
     }
@@ -401,6 +456,12 @@ string easy_dial::anterior() throw(error){
     menorFreqT(pt, minT, q2);
 
     sb = false;
+
+    if (minT == nullptr){
+        phoneANT = phoneMAX;
+        return phoneMAX.nom();
+    }
+
     phoneANT = minT->_p;
     return minT->_p.nom();
 
@@ -488,7 +549,7 @@ void easy_dial::mergeSortNom(vector<string> &V){
         unsigned int i = 0, j = 0, k = 0;
     
 
-        while(i < vleft.size() and j < vleft.size()){
+        while(i < vleft.size() and j < vright.size()){
             if (vleft[i] < vright[j]){
                 V[k] = vleft[i];
                 ++i;
@@ -533,7 +594,10 @@ void easy_dial::comencen(const string& pref, vector<string>& result) const throw
                 recorregutnoms(pt->_cen, result);
             }
         }
+    
+        
 
+        
         mergeSortNom(result);
     }
 }
@@ -544,20 +608,27 @@ double easy_dial::longitud_mitjana() const throw(){
     double sum = 0;
    
     for (int i = 0; i < size; i++) {
-        sum += arrayFreqs[i];
+        
+        sum += arrayFreqs[i].frequencia();
     }
+    
+    
+
 
     double Pr[size];
 
     for (int i = 0; i < size; i++){
-        Pr[i] = arrayFreqs[i] / sum;   //freqs = Pr(s)
+        Pr[i] = arrayFreqs[i].frequencia() / sum;  
     }
+
+
 
     double res = 0;
 
     for (int i = 0; i < size; ++i){
-        res += Pr[i] * i;
+        res += (Pr[i] * pulsacions[i]);
     }
+  
 
     return res;
 

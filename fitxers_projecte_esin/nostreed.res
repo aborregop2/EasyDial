@@ -6337,10 +6337,10 @@ MARIA
 1001
 ##1001
 #seguent R
-
+MARTA
 ##MARTA
 #num_telf
-Error::easy_dial:32:No hi ha telefons amb el prefix en curs.
+1005
 ##1005
 #anterior
 MARIA
@@ -6461,22 +6461,22 @@ MIQUEL
 1004
 ##1004
 #seguent A
-
+MARIA
 ##MARIA
 #seguent R
-Error::easy_dial:31:Prefix en curs indefinit.
+MARTA
 ##MARTA
 #num_telf
-Error::easy_dial:31:Prefix en curs indefinit.
+1005
 ##1005
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+MARIA
 ##MARIA
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+MIQUEL
 ##MIQUEL
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+JOSEP
 ##JOSEP
 ###!
 ###!
@@ -6578,7 +6578,7 @@ MARTA
 ##
 ###!
 #longitud_mitj
-1.4
+1.33333
 ##1.33333
 ###!
 ###!
@@ -8942,10 +8942,10 @@ MARIA
 1001
 ##1001
 #seguent R
-
+MARTA
 ##MARTA
 #num_telf
-Error::easy_dial:32:No hi ha telefons amb el prefix en curs.
+1005
 ##1005
 #anterior
 MARIA
@@ -9022,10 +9022,10 @@ JOVANNA
 JO
 ##JO
 #anterior
-MIQUEL
+JOSEP
 ##JOSEP
 #num_telf
-1004
+1002
 ##1002
 #seguent J
 JO
@@ -9061,7 +9061,7 @@ JACINT
 JO
 ##JO
 #anterior
-MIQUEL
+JOSEP
 ##JOSEP
 ###!
 ###!--------------------------------------------------
@@ -9117,73 +9117,73 @@ MIQUEL
 1004
 ##1004
 #seguent A
-
+MARIA
 ##MARIA
 #seguent R
-Error::easy_dial:31:Prefix en curs indefinit.
+MARTA
 ##MARTA
 #num_telf
-Error::easy_dial:31:Prefix en curs indefinit.
+1005
 ##1005
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+MARIA
 ##MARIA
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+MIQUEL
 ##MIQUEL
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+JOSEP
 ##JOSEP
 #seguent J
-Error::easy_dial:31:Prefix en curs indefinit.
+JO
 ##JO
 #num_telf
-Error::easy_dial:31:Prefix en curs indefinit.
+1006
 ##1006
 #seguent O
-Error::easy_dial:31:Prefix en curs indefinit.
+JOVANNA
 ##JOVANNA
 #num_telf
-Error::easy_dial:31:Prefix en curs indefinit.
+1007
 ##1007
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+JO
 ##JO
 #seguent E
-Error::easy_dial:31:Prefix en curs indefinit.
+JESUS
 ##JESUS
 #num_telf
-Error::easy_dial:31:Prefix en curs indefinit.
+1008
 ##1008
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+JO
 ##JO
 #seguent A
-Error::easy_dial:31:Prefix en curs indefinit.
+JACINT
 ##JACINT
 #num_telf
-Error::easy_dial:31:Prefix en curs indefinit.
+1009
 ##1009
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+JO
 ##JO
 #seguent E
-Error::easy_dial:31:Prefix en curs indefinit.
+JESUS
 ##JESUS
 #seguent S
-Error::easy_dial:31:Prefix en curs indefinit.
+JESULIN
 ##JESULIN
 #num_telf
-Error::easy_dial:31:Prefix en curs indefinit.
+1010
 ##1010
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+JESUS
 ##JESUS
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+JO
 ##JO
 #anterior
-Error::easy_dial:31:Prefix en curs indefinit.
+JOSEP
 ##JOSEP
 ###!
 ###!
@@ -9200,7 +9200,7 @@ JACINT JESULIN JESUS JO JOSEP JOVANNA MAR MARIA MARTA MIQUEL
 
 ##
 #comencen "J"
-JACINT JESULIN JO JESUS JOSEP JOVANNA 
+JACINT JESULIN JESUS JO JOSEP JOVANNA 
 ##JACINT JESULIN JESUS JO JOSEP JOVANNA 
 #comencen "JZ"
 
@@ -9342,7 +9342,7 @@ MARTA
 ##
 ###!
 #longitud_mitj
-3.42308
+1.5
 ##1.5
 ###!
 ###!
