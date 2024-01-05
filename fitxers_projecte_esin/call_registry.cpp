@@ -1,12 +1,15 @@
 #include "call_registry.hpp"
 
+//θ(1)
 call_registry::call_registry() throw(error) : _arrel(nullptr), _size(0) {}
 
+//θ(1)
 call_registry::node::node(const phone &tl, node* fesq, node* fdret) throw(error)
     : _tl(tl), _fesq(fesq), _fdret(fdret), _altura(1){
 
 }
 
+//θ(1)
 nat call_registry::altura(node *n){
     if (n == nullptr){
         return 0;
@@ -14,6 +17,7 @@ nat call_registry::altura(node *n){
     return n->_altura;
 }
 
+//θ(1)
 int call_registry::factor_equilibri(node *n){
     if (n == nullptr){
         return 0;
@@ -21,6 +25,7 @@ int call_registry::factor_equilibri(node *n){
     return altura (n->_fesq) - altura(n->_fdret);
 }
 
+//θ(1)
 call_registry::node* call_registry::rotacio_dreta(node *y){
     node *x = y->_fesq;
     if (x != nullptr){
@@ -37,7 +42,7 @@ call_registry::node* call_registry::rotacio_dreta(node *y){
     return y;
 }
 
-
+//θ(1)
 call_registry::node* call_registry::rotacio_esquerra(node *x){
     node *y = x->_fdret ;
     if (y != nullptr){
@@ -48,15 +53,16 @@ call_registry::node* call_registry::rotacio_esquerra(node *x){
 
         y->_altura = max(altura(y->_fesq), altura(y->_fdret)) + 1;
         x->_altura = max(altura(x->_fesq), altura(x->_fdret)) + 1;
+        
         return y;
     }
     return x;
 }
 
+//θ(log n)
 call_registry::node* call_registry::insereix(node *n, phone p){
     if (n == nullptr){
         return new node(p);
-        
     }
     else if (p.numero() < n->_tl.numero()){
         n->_fesq = insereix(n->_fesq, p);
@@ -93,9 +99,7 @@ call_registry::node* call_registry::insereix(node *n, phone p){
     return n;
 }
 
-
-
-
+//θ(n)
 call_registry::node* call_registry::cpyCallRegistry(node *n) {
     node *root = nullptr;
     if (n != nullptr) {
@@ -112,19 +116,24 @@ call_registry::node* call_registry::cpyCallRegistry(node *n) {
     return root;
 }
 
+//θ(n)
 call_registry::call_registry(const call_registry& R) throw(error) : _size(R._size) {
-    _arrel = cpyCallRegistry(R._arrel);
+     _arrel = cpyCallRegistry(R._arrel);
      _size = R._size;
 }
 
+//θ(n)
 call_registry& call_registry::operator=(const call_registry& R) throw(error) {
     if (this != &R) {
+        node* del = _arrel;
         _arrel = cpyCallRegistry(R._arrel);
+        _size = R._size;
     }
-    _size = R._size;
+    
     return *this;
 }
 
+//θ(n)
 void call_registry::deleteCallRegistry(node *n) {
     if (n != nullptr) {
         deleteCallRegistry(n->_fesq);
@@ -134,10 +143,12 @@ void call_registry::deleteCallRegistry(node *n) {
     }
 }
 
+//θ(n)
 call_registry::~call_registry() throw() {
     deleteCallRegistry(_arrel);
 }
 
+//θ(log n)
 void call_registry::registra_trucada(nat num) throw(error) {
     if (this->conte(num)) {
         node *p = nullptr;
@@ -151,6 +162,7 @@ void call_registry::registra_trucada(nat num) throw(error) {
     }
 }
 
+//θ(log n)
 void call_registry::assigna_nom(nat num, const string& name) throw(error) {
     if (this->conte(num)) {
         node *p = nullptr;
@@ -166,6 +178,7 @@ void call_registry::assigna_nom(nat num, const string& name) throw(error) {
     }
 }
 
+//θ(1)
 call_registry::node* call_registry::elimina_maxim (node *n) throw (){
     node * p_orig = n, *father= nullptr ;
     while (n->_fdret != nullptr ) {
@@ -180,7 +193,8 @@ call_registry::node* call_registry::elimina_maxim (node *n) throw (){
     return n;
 }
 
-call_registry::node* call_registry::ajunta( node *n1 , node *n2 ) throw (){
+//θ(1)
+call_registry::node* call_registry::ajunta(node *n1 , node *n2 ) throw (){
     if (n1 == nullptr) {
         return n2;
     }
@@ -192,6 +206,7 @@ call_registry::node* call_registry::ajunta( node *n1 , node *n2 ) throw (){
     return p ;
 }
 
+//θ(n)
 void call_registry::recalcula_altures(node *p){
     if (p != nullptr){
         recalcula_altures(p->_fesq);
@@ -199,7 +214,8 @@ void call_registry::recalcula_altures(node *p){
         p->_altura = max(altura(p->_fesq), altura(p->_fdret)) + 1;
     }
 }
- 
+
+//θ(log n)
 call_registry::node* call_registry::esborra(node *n, nat num){
 
     if (n != nullptr){
@@ -245,10 +261,7 @@ call_registry::node* call_registry::esborra(node *n, nat num){
         return n;
     }
 
-
-
-
-
+//θ(log n)
 void call_registry::elimina(nat num) throw(error) {
     if (this->conte(num)){
         _arrel = esborra(_arrel, num);
@@ -259,6 +272,7 @@ void call_registry::elimina(nat num) throw(error) {
     }
 }
 
+//θ(log n)
 void call_registry::findPhone(node *n, node* &p, nat num) {
     if (n != nullptr and p == nullptr) {
         if (n->_tl.numero() < num) {
@@ -271,6 +285,7 @@ void call_registry::findPhone(node *n, node* &p, nat num) {
     }
 }
 
+//θ(log n)
 bool call_registry::conte(nat num) const throw() {
     node *p = nullptr;
     findPhone(_arrel, p, num);
@@ -278,6 +293,7 @@ bool call_registry::conte(nat num) const throw() {
     return p != nullptr;
 }
 
+//θ(h)
 string call_registry::nom(nat num) const throw(error) {
     if (this->conte(num)) {
         node *p = nullptr;
@@ -290,6 +306,7 @@ string call_registry::nom(nat num) const throw(error) {
     }
 }
 
+//θ(h)
 nat call_registry::num_trucades(nat num) const throw(error) {
     if (this->conte(num)) {
         node *p = nullptr;
@@ -302,14 +319,17 @@ nat call_registry::num_trucades(nat num) const throw(error) {
     }
 }
 
+//θ(1)
 bool call_registry::es_buit() const throw() {
     return _arrel == nullptr;
 }
 
+//θ(1)
 nat call_registry::num_entrades() const throw() {
     return _size;
 }
 
+//θ(n)
 void call_registry::inorder(node *n, vector<phone>& V) {
     if (n != nullptr) {
         inorder(n->_fesq, V);
@@ -320,6 +340,7 @@ void call_registry::inorder(node *n, vector<phone>& V) {
     }
 }
 
+//θ(n log(n))
 void call_registry:: mergeSortNoms(vector<phone> &V){
     if(V.size() > 1){
         int half = V.size()/2;
@@ -366,6 +387,7 @@ void call_registry:: mergeSortNoms(vector<phone> &V){
     }
 } 
 
+//θ(n log(n))
 void call_registry::dump(vector<phone>& V) const throw(error) {
     inorder(_arrel, V);
     mergeSortNoms(V);
