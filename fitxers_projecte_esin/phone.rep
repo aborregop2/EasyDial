@@ -1,4 +1,4 @@
-// Representacio d'un phone a partir del seu numero, nom i frequencia
+// Representacio d'un Phone a partir del seu numero, nom i frequencia
 
 nat _num;          // Número de teléfon 
 string _nom;       // Nom de l'usuari propietari del telèfon  

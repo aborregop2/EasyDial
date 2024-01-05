@@ -22,7 +22,7 @@ int call_registry::factor_equilibri(node *n){
     if (n == nullptr){
         return 0;
     }
-    return altura (n->_fesq) - altura(n->_fdret);
+    return altura(n->_fesq) - altura(n->_fdret);
 }
 
 //θ(1)
@@ -184,6 +184,7 @@ call_registry::node* call_registry::elimina_maxim (node *n) throw (){
         father = n;
         n = n->_fdret;
     }
+    
     if (father != nullptr) {
         father->_fdret = n->_fesq ; 
         n->_fesq = p_orig;

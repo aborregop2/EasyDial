@@ -12,24 +12,74 @@ node *_arrel;
 nat _size;
 
 // Metodes Constructors
+
+// Pre: n es un punter a l'arrel d'un call_registry
+// Post: retorna el punter a l'arrel d'una copia del call_registry amb _arrel = n
 static node* cpyCallRegistry(node *n);
 
+
 // Metodes Destructor
+
+// Pre: n es un punter a l'arrel d'un call_registry
+// Post: elimina tot el call_registry
 static void deleteCallRegistry(node *n);
 
+
 // Metodes Modificadors
+
+// Pre: true
+// Post: elimina el maxim node del subarbre i ajusta
 static node* elimina_maxim (node* n) throw ();
+
+// Pre: true
+// Post: recalcula les altures dels nodes del subarbre amb arrel p
 static void recalcula_altures(node *p);
+
+// Pre: El node y no és nul i té un fill esquerre no nul.
+/* Post: Realitza una rotació cap a la dreta a l'arbre, reequilibrant els nodes x i y.
+         S'actualitzen les alçades dels nodes x i y segons sigui necessari.
+         Retorna el nou node que es troba a la posició x.
+*/
 static node* rotacio_dreta(node *y);
+
+// Pre: El node x no és nul i té un fill dret no nul.
+/* Post: Realitza una rotació cap a l'esquerra a l'arbre, reequilibrant els nodes x i y.
+         S'actualitzen les alçades dels nodes x i y segons sigui necessari.
+         Retorna el nou node que es troba a la posició y.
+*/
 static node* rotacio_esquerra(node *x);
+
+// Pre: n es un punter a l'arrel d'un call_registry
+// Post: el phone p es inserit al call_registry
 static node* insereix(node *n, phone p);
+
+// Pre: n es un punter a l'arrel d'un call_registry
+// Post: el node amb phon.numero() == num es esborrat
 static node* esborra(node *n, nat num);
-static node* ajunta (node *n1 , node *n2 ) throw ();
+
+// Pre: True
+// Post: Retorna un nou node que uneix els arbres amb arrels a 'n1' i 'n2'.
+static node* ajunta (node *n1 , node *n2) throw ();
+
 
 // Metodes Consultors
+
+// Pre: True
+// Post: retorna l'altura de n
 static nat altura(node *n);
+
+// Pre: True
+// Post: retorna el factor equilibri respecte de n (altura(n->_fesq) - altura(n->_fdret))
 static int factor_equilibri(node *n);
+
+// Pre: n es un punter a l'arrel d'un call_registry
+// Post: a p estara un punter al node del telefon cercat per la seva clau num si es que esta al call_registry
 static void findPhone(node *n, node* &p, nat num);
+
+// Pre: n es un punter a l'arrel d'un call_registry
+// Post: a V estaran tots els phones de call_registry amb nom no buit
 static void inorder(node *n, vector<phone>& V);
 
+// Pre: True
+// Post: ordena a V els phones per nom
 static void mergeSortNoms(vector<phone> &V);
