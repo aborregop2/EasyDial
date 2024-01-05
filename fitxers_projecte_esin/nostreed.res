@@ -79,10 +79,10 @@
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -91,7 +91,7 @@
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -109,7 +109,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -127,7 +127,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -142,7 +142,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -157,7 +157,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -175,7 +175,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -190,7 +190,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -205,7 +205,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -215,28 +215,28 @@ Error::easy_dial:31:Prefix en curs indefinit.
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #num_telf
 Error::easy_dial:32:No hi ha telefons amb el prefix en curs.
 ##Error::easy_dial:32:No hi ha telefons amb el prefix en curs.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #seguent Z
 Error::easy_dial:31:Prefix en curs indefinit.
@@ -251,13 +251,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #seguent ""
 Error::easy_dial:31:Prefix en curs indefinit.
@@ -272,13 +272,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #seguent Z
 Error::easy_dial:31:Prefix en curs indefinit.
@@ -293,13 +293,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #seguent ""
 Error::easy_dial:31:Prefix en curs indefinit.
@@ -314,13 +314,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #anterior
 Error::easy_dial:33:No es pot eliminar caracter en el prefix en curs.
@@ -335,13 +335,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #anterior
 Error::easy_dial:33:No es pot eliminar caracter en el prefix en curs.
@@ -353,13 +353,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #anterior
 Error::easy_dial:33:No es pot eliminar caracter en el prefix en curs.
@@ -371,7 +371,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -416,10 +416,10 @@ Error::easy_dial:31:Prefix en curs indefinit.
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -428,7 +428,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -446,7 +446,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -464,7 +464,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -479,7 +479,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -494,7 +494,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -512,7 +512,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -527,7 +527,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -542,7 +542,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
@@ -552,28 +552,28 @@ Error::easy_dial:31:Prefix en curs indefinit.
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #num_telf
 Error::easy_dial:32:No hi ha telefons amb el prefix en curs.
 ##Error::easy_dial:32:No hi ha telefons amb el prefix en curs.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #seguent Z
 Error::easy_dial:31:Prefix en curs indefinit.
@@ -588,13 +588,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #seguent ""
 Error::easy_dial:31:Prefix en curs indefinit.
@@ -609,13 +609,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #seguent Z
 Error::easy_dial:31:Prefix en curs indefinit.
@@ -630,13 +630,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #seguent ""
 Error::easy_dial:31:Prefix en curs indefinit.
@@ -651,13 +651,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #anterior
 Error::easy_dial:33:No es pot eliminar caracter en el prefix en curs.
@@ -672,13 +672,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #anterior
 Error::easy_dial:33:No es pot eliminar caracter en el prefix en curs.
@@ -690,13 +690,13 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!
 #init d easy_dial rc
 #inici
-
+ 
 ##
 #anterior
 Error::easy_dial:33:No es pot eliminar caracter en el prefix en curs.
@@ -708,7 +708,7 @@ Error::easy_dial:31:Prefix en curs indefinit.
 Error::easy_dial:31:Prefix en curs indefinit.
 ##Error::easy_dial:31:Prefix en curs indefinit.
 #inici
-
+ 
 ##
 #d destroy
 ###!

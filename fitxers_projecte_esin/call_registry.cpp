@@ -125,7 +125,6 @@ call_registry::call_registry(const call_registry& R) throw(error) : _size(R._siz
 //θ(n)
 call_registry& call_registry::operator=(const call_registry& R) throw(error) {
     if (this != &R) {
-        node* del = _arrel;
         _arrel = cpyCallRegistry(R._arrel);
         _size = R._size;
     }
