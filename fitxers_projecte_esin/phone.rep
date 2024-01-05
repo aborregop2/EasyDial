@@ -1,5 +1,7 @@
-nat _num;          //Aquest atribut representa el número de teléfon 
-string _nom;       //Aquest atribut representa el nom de l'usuari propietari del telèfon  
-nat _compt;        //Aquest atribut representa el nombre de vegades que s'ha trucat al telèfon
+// Representacio d'un phone a partir del seu numero, nom i frequencia
+
+nat _num;          // Número de teléfon 
+string _nom;       // Nom de l'usuari propietari del telèfon  
+nat _compt;        // Nombre de vegades que s'ha trucat al telèfon
 
 
