@@ -20,6 +20,7 @@ void dialog::dialog(easy_dial& easy, const string& input, vector<string>& answer
         
       } catch (error e) {
         numtelf = 0;
+        answers.size() = 0;
         answers.push_back(e.mensaje());
         break;
       }
