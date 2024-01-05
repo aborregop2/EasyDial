@@ -1,4 +1,4 @@
-//Call registry será un AVL de Phone.
+// Call registry representat per un AVL de Phone.
 
 struct node{
     phone _tl;  
@@ -11,19 +11,25 @@ struct node{
 node *_arrel;
 nat _size;
 
-static nat altura(node *n);
-static int factor_equilibri(node *n);
+// Metodes Constructors
+static node* cpyCallRegistry(node *n);
+
+// Metodes Destructor
+static void deleteCallRegistry(node *n);
+
+// Metodes Modificadors
+static node* elimina_maxim (node* n) throw ();
+static void recalcula_altures(node *p);
 static node* rotacio_dreta(node *y);
 static node* rotacio_esquerra(node *x);
 static node* insereix(node *n, phone p);
 static node* esborra(node *n, nat num);
-static node* ajunta ( node *n1 , node *n2 ) throw ();
-static node * elimina_maxim ( node * n) throw ();
+static node* ajunta (node *n1 , node *n2 ) throw ();
 
-static node* cpyCallRegistry(node *n);
-static void deleteCallRegistry(node *n);
+// Metodes Consultors
+static nat altura(node *n);
+static int factor_equilibri(node *n);
 static void findPhone(node *n, node* &p, nat num);
 static void inorder(node *n, vector<phone>& V);
-static void mergeSortNoms(vector<phone> &V);
-static void recalcula_altures(node *p);
 
+static void mergeSortNoms(vector<phone> &V);
