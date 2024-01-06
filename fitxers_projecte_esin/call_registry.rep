@@ -11,14 +11,14 @@ struct node{
 node *_arrel;
 nat _size;
 
-// Metodes Constructors
+// Metode Copia
 
 // Pre: n es un punter a l'arrel d'un call_registry
 // Post: retorna el punter a l'arrel d'una copia del call_registry amb _arrel = n
 static node* cpyCallRegistry(node *n);
 
 
-// Metodes Destructor
+// Metode Destructor
 
 // Pre: n es un punter a l'arrel d'un call_registry
 // Post: elimina tot el call_registry

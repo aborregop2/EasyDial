@@ -1,12 +1,15 @@
-//Easy_dial serà un tst
+//Easy_dial representat per un TST
 
 struct node {
        char _c;    // Símbol posició i-èssima de la clau
-       phone _p;
+       phone _p;   // Phone a nodes amb l'ultim caracter del nom corresponent a _p.nom()
        node* _esq; // Fill esquerra, apunta a símbols mateixa posició formant un BST
        node* _cen; // Fill central, apunta a símbols següent posició
        node* _dre; // Fill dret, apunta a símbols mateixa posició formant un BST
        bool _visitat;
+       //Pre: true
+       /*Post: s'ha construit un node apartir del seu caracter c, fills esquerra i dret esq dre, 
+               i del bool que determina si esta visitat v */
        node(const char &c, node* esq = nullptr, node* cen = nullptr, node* dre = nullptr, bool v = false) throw(error);
 };
      node* _arrel;
@@ -21,24 +24,52 @@ struct node {
      int *pulsacions;
 
 
-     
-     node* insereix(node *t, nat i, const string &k, phone ph);
+     // Metode Copia
 
+     // Pre: p es un punter a l'arrel d'un easy_dial
+     // Post: retorna el punter a l'arrel d'una copia de l'easy dial amb _arrel = p
      static node* cpyeasydial(node *p);
 
+
+     // Metode Destructor
+
+     // Pre: p es un punter a l'arrel d'un easy_dial
+     // Post: elimina tot l'easy dial
      static void delete_easy_dial(node *p);
      
-     static void F(node* S, phone &ph, node *&aux); //Hay que probar las inicializaciones
-
-
-     static void fistring(node *S, string p, node* &pt, int i = 0);
-
-     static void recorregutnoms(node *pt, vector<string> &result);
      
-     static void mergeSortNom(vector<string> &V);
+     // Metodes Modificadors
 
+     // Pre: t es un punter a l'arrel d'un easy_dial, i val 0 i ph es un phone no buit
+     // Post: insereix a l'easy_dial tots els caracters de k i a l'ultim caracter el phone ph
+     node* insereix(node *t, nat i, const string &k, phone ph);
+
+     // Pre: pt es un punter a l'arrel d'un easy_dial
+     // Post: tots nodes amb phone.nom() no buit pasen a no estar visitats
      static void resVisitat(node *pt);
 
+       
+     // Metodes Consultors
+
+     // Pre: true
+     // Post: a ph es troba el phone amb mes frequencia no visitat apartir del caracter S->_c i a aux el node on esta ph
+     static void F(node* S, phone &ph, node *&aux); 
+
+     // Pre: S es un punter a l'arrel d'un easy_dial
+     // Post: a pt es troba un punter al node de l'easy dial de l'ultim caracter de p seguint el cami des de l'arrel
+     static void fistring(node *S, string p, node* &pt, int i = 0);
+     
+     // Pre: pt es un punter a l'arrel d'un easy_dial
+     // Post: a result es troben tots els noms dels phones no buits de l'easy dial
+     static void recorregutnoms(node *pt, vector<string> &result);
+
+     // Pre: p es un punter a l'arrel d'un easy_dial
+     // Post: a f es troba el node visitat amb menor frequencia i a min el phone d'aquest node
      static void menorFreqT(node *p, node *&f, phone &min);
+
+
+     // Pre: true
+     // Post: a V estan els phones ordenats per nom
+     static void mergeSortNom(vector<string> &V);
 
      

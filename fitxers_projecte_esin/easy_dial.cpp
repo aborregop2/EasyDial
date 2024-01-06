@@ -1,5 +1,6 @@
 #include "easy_dial.hpp"
 
+//θ(n log(n))
 void mergeSortFreq(vector<phone> &V){
     if(V.size() > 1){
         int half = V.size()/2;
@@ -47,12 +48,12 @@ void mergeSortFreq(vector<phone> &V){
 
 }
 
-
-easy_dial::node::node(const char &c, node* esq, node* cen, node* dre, bool v) throw(error): //Hay que poner phone
+//θ(1)
+easy_dial::node::node(const char &c, node* esq, node* cen, node* dre, bool v) throw(error):
 _c(c), _esq(esq), _cen(cen), _dre(dre), _visitat(v){
 }
 
-
+//θ(log s)
 easy_dial::node* easy_dial::insereix(node *t, nat i, const string &k, phone ph){
     if (t == nullptr) {
         t = new node(k[i]);
@@ -73,10 +74,11 @@ easy_dial::node* easy_dial::insereix(node *t, nat i, const string &k, phone ph){
         else if (t->_c < k[i]) {
             t->_dre = insereix(t->_dre, i, k, ph);
         }
-        else { // (t->_c == k[i])
+        else {
             t->_cen = insereix(t->_cen, i+1, k, ph);
         }
     }
+
     if (i == k.size()-1 and t != nullptr){
         t->_p = ph;
     }
@@ -84,9 +86,11 @@ easy_dial::node* easy_dial::insereix(node *t, nat i, const string &k, phone ph){
         phone p;
         t->_p = p;
     }
+
     return t;
 }
 
+//
 easy_dial::easy_dial(const call_registry& R) throw(error){
     vector<phone> v;
     pref_curs = "";
@@ -94,12 +98,9 @@ easy_dial::easy_dial(const call_registry& R) throw(error){
     indefinit = true;
     sb = false;
     fiprefZ = false;
- 
     
     R.dump(v);
     mergeSortFreq(v);
-
-
 
     size = v.size();
 
@@ -109,24 +110,16 @@ easy_dial::easy_dial(const call_registry& R) throw(error){
         ptr[i] = v[i];
     }
  
-
     arrayFreqs = ptr;
-
-    
-
-
     
     if (v.size() != 0){
-         phoneMAX = v[0];
-        
+         phoneMAX = v[0]; 
     }
-
 
     int j = 0;
     for(int i = 0; i < v.size(); ++i){
         _arrel = insereix(_arrel, j, v[i].nom(), v[i]);
     }
-   
    
     indefinit = false;
 
@@ -170,13 +163,10 @@ easy_dial::easy_dial(const call_registry& R) throw(error){
     }
 
     indefinit = true;
-
     pulsacions = ptrp;
-    
-    
-
 }
 
+//θ(s)
 easy_dial::node* easy_dial::cpyeasydial(node *p){
     node *root = nullptr;
     if (p != nullptr){
@@ -188,10 +178,12 @@ easy_dial::node* easy_dial::cpyeasydial(node *p){
     return root;
 }
 
+//θ(s)
 easy_dial::easy_dial(const easy_dial& D) throw(error){
     _arrel = cpyeasydial(D._arrel);
 }
 
+//θ(s)
 easy_dial& easy_dial::operator=(const easy_dial& D) throw(error){
     if (this != &D){
         _arrel = cpyeasydial(D._arrel);
@@ -199,6 +191,7 @@ easy_dial& easy_dial::operator=(const easy_dial& D) throw(error){
     return *this;
 }
 
+//θ(s)
 void easy_dial::delete_easy_dial(node *p){
     if (p != nullptr){
         delete_easy_dial(p->_esq);
@@ -209,10 +202,12 @@ void easy_dial::delete_easy_dial(node *p){
     }
 }
 
+//θ(s)
 easy_dial::~easy_dial() throw(){
     delete_easy_dial(_arrel);
 }
 
+//θ(s)
 void easy_dial::resVisitat(node *pt) {
     if (pt != nullptr) {
         if (pt->_p.nom() != "") {
@@ -225,6 +220,7 @@ void easy_dial::resVisitat(node *pt) {
     }
 }
 
+//θ(s)
 string easy_dial::inici() throw(){
     pref_curs = "";
     indefinit = false;
@@ -232,7 +228,6 @@ string easy_dial::inici() throw(){
     fiprefZ = false;
     resVisitat(_arrel);
 
-    
     if (_arrel != nullptr){
         phone ph;
         node* aux;
@@ -245,10 +240,9 @@ string easy_dial::inici() throw(){
     }
 
     return "";
-    
 }
 
-
+//θ(log l)
 void easy_dial::fistring(node *S, string p, node* &pt, int i){//i == 0
     if (S != nullptr and i != p.size()){
         
@@ -272,6 +266,7 @@ void easy_dial::fistring(node *S, string p, node* &pt, int i){//i == 0
     }
 }
 
+//θ(s)
 void easy_dial::F(node* S, phone &ph, node *&aux) { 
     if (S != nullptr){
         if (ph < S->_p and not S->_visitat){
@@ -284,10 +279,9 @@ void easy_dial::F(node* S, phone &ph, node *&aux) {
         F(S->_dre, ph, aux);
 
     }
-
 }
 
-
+//θ(s)
 string easy_dial::seguent(char c) throw(error){
     node *pt = nullptr;
 
@@ -320,16 +314,11 @@ string easy_dial::seguent(char c) throw(error){
         fiprefZ = false;
     }
 
-   
     pref_curs += c;
 
-
-    
     pt = nullptr;
     
     fistring(_arrel, pref_curs, pt);
-    
-    
     
     if (pt == nullptr and (size == 0 or sb == true)){
             indefinit = true;
@@ -337,7 +326,7 @@ string easy_dial::seguent(char c) throw(error){
     }
     else if (pt == nullptr){
         sb = true;
-        return "";  //<- entra aqui
+        return ""; 
     }
     
     node* aux = nullptr;
@@ -370,6 +359,7 @@ string easy_dial::seguent(char c) throw(error){
     return ph.nom();
 }
 
+//θ(s)
 void easy_dial::menorFreqT(node *p, node *&f, phone &min){
     
     if (p != nullptr){
@@ -385,6 +375,7 @@ void easy_dial::menorFreqT(node *p, node *&f, phone &min){
     }
 }
 
+//θ(s)
 string easy_dial::anterior() throw(error){
    
     node *pt = nullptr; 
@@ -393,8 +384,6 @@ string easy_dial::anterior() throw(error){
     if (indefinit){
         throw error(ErrPrefixIndef);
     }
-
-    
 
     if (pref_curs == ""){
         if (phoneMAX == phoneANT){
@@ -406,9 +395,6 @@ string easy_dial::anterior() throw(error){
             return phoneMAX.nom();
         } 
     }
-   
-
-    
 
     fistring(_arrel, pref_curs, pt);
     phone q = phoneMAX;
@@ -420,8 +406,6 @@ string easy_dial::anterior() throw(error){
     }
 
     minT = nullptr;
-    
-  
    
     if (fiprefZ){
         fiprefZ = false;
@@ -463,10 +447,12 @@ string easy_dial::anterior() throw(error){
     }
 
     phoneANT = minT->_p;
-    return minT->_p.nom();
 
+
+    return minT->_p.nom();
 }
 
+//θ(s)
 nat easy_dial::num_telf() const throw(error){
 
     
@@ -519,6 +505,7 @@ nat easy_dial::num_telf() const throw(error){
 
 }
 
+//θ(s)
 void easy_dial::recorregutnoms(node *pt, vector<string> &result){
     if (pt != nullptr){
         if (pt->_p.nom() != ""){
@@ -531,6 +518,8 @@ void easy_dial::recorregutnoms(node *pt, vector<string> &result){
     } 
 }
 
+
+//θ(n log(n))
 void easy_dial::mergeSortNom(vector<string> &V){
         if(V.size() > 1){
         int half = V.size()/2;
@@ -577,6 +566,7 @@ void easy_dial::mergeSortNom(vector<string> &V){
     }
 }
 
+//θ(log l)
 void easy_dial::comencen(const string& pref, vector<string>& result) const throw(error){
     if (_arrel != nullptr){
         
@@ -594,16 +584,13 @@ void easy_dial::comencen(const string& pref, vector<string>& result) const throw
                 recorregutnoms(pt->_cen, result);
             }
         }
-    
-        
 
-        
         mergeSortNom(result);
     }
 }
 
 
-
+//θ(n)
 double easy_dial::longitud_mitjana() const throw(){
     double sum = 0;
    
@@ -611,17 +598,12 @@ double easy_dial::longitud_mitjana() const throw(){
         
         sum += arrayFreqs[i].frequencia();
     }
-    
-    
-
 
     double Pr[size];
 
     for (int i = 0; i < size; i++){
         Pr[i] = arrayFreqs[i].frequencia() / sum;  
     }
-
-
 
     double res = 0;
 
@@ -631,6 +613,4 @@ double easy_dial::longitud_mitjana() const throw(){
   
 
     return res;
-
-
 }
