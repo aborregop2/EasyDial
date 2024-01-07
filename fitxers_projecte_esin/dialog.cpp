@@ -4,15 +4,17 @@ void dialog::dialog(easy_dial& easy, const string& input, vector<string>& answer
  
     string s = easy.inici();
     answers.push_back(s);
+    
     if (s == ""){
       answers.push_back("No hi ha telefons amb el prefix en curs.");
       numtelf = 0;
     }
-   try{
-          numtelf = easy.num_telf();
+    
+    try{
+      numtelf = easy.num_telf();
     }
     catch (error e){
-          numtelf = 0;
+      numtelf = 0;
     }
     
     for (unsigned int i = 0; i < input.size(); ++i) {
@@ -35,6 +37,7 @@ void dialog::dialog(easy_dial& easy, const string& input, vector<string>& answer
             answers.push_back(s);
           }
         }
+
         try{
           numtelf = easy.num_telf();
         }
@@ -42,7 +45,8 @@ void dialog::dialog(easy_dial& easy, const string& input, vector<string>& answer
           numtelf = 0;
         }
         
-      } catch (error e) {
+      } 
+      catch (error e) {
         numtelf = 0;
         answers.clear();
         answers.push_back("");
