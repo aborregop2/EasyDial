@@ -24,6 +24,7 @@ clean:
 	rm *.ghc
 
 test:
+	./driver_easydial.exe < jp_public_phone.in | diff - jp_public_phone.res
+	./driver_easydial.exe < jp_public_call_registry.in | diff - jp_public_call_registry.res
+	./driver_easydial.exe < jp_public_easy_dial.in | diff - jp_public_easy_dial.res
 	./driver_easydial.exe < jp_public_dialog.in | diff - jp_public_dialog.res
-#	./program.e < sample2.inp | diff - sample2.cor
-#	./program.e < sample3.inp | diff - sample3.cor
