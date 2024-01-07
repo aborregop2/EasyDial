@@ -1,4 +1,9 @@
-//Easy_dial representat per un TST
+// Easy_dial representat per un TST
+// A l'hora d'escollir l'estructura per fer un easy_dial vam pensar 
+// directament en un TST, ja que encara que ocupi una mica més de memòria,
+// el TST és una estructura que ens permetia visualitzar els recorreguts per nom
+// d'una manera molt més senzilla. Això juntament amb l'eficiència de l'estructura, (θ(l log (n))
+// va fer-la la candidata perfecta.
 
 struct node {
        char _c;    // Símbol posició i-èssima de la clau

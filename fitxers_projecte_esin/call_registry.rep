@@ -1,4 +1,10 @@
 // Call registry representat per un AVL de Phone.
+// Hem escollit un AVL ja que hem pensat que sería la forma més eficient per
+// poder accedir a tots els telèfons. Vam pensar en altres alternatives com les
+// hash tables, però, ens va semblar més atractiu fer-ho amb l'AVL.
+// Una de les raons va ser que estabem més familiaritzats amb els arbres.
+// A més, al buscar elements a la hash table, haviem de tenir la clau o recorrer
+// tota l'estructura, cosa que hagués causat un cost lineal.
 
 struct node{
     phone _tl;  
