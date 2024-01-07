@@ -57,6 +57,8 @@ _c(c), _esq(esq), _cen(cen), _dre(dre), _visitat(v){
 easy_dial::node* easy_dial::insereix(node *t, nat i, const string &k, phone ph){
     if (t == nullptr) {
         t = new node(k[i]);
+        phone p;
+        t->_p = p;
         try {
             if (i < k.length()-1) {
                 t->_cen = insereix(t->_cen, i+1, k, ph);
@@ -90,80 +92,77 @@ easy_dial::node* easy_dial::insereix(node *t, nat i, const string &k, phone ph){
     return t;
 }
 
-//
+//θ(n log(n)))
 easy_dial::easy_dial(const call_registry& R) throw(error){
     vector<phone> v;
-    pref_curs = "";
+    _pref_curs = "";
     _arrel = nullptr;
-    indefinit = true;
-    sb = false;
-    fiprefZ = false;
+    _indefinit = true;
+    _stringBuit = false;
+    _fiprefZ = false;
     
     R.dump(v);
     mergeSortFreq(v);
 
-    size = v.size();
+    _size = v.size();
 
-    phone *ptr = new phone[v.size()];
+    phone *ptr = new phone[_size];
 
-    for (int i = 0; i < v.size(); ++i){
+    for (int i = 0; i < _size; ++i){
         ptr[i] = v[i];
     }
  
-    arrayFreqs = ptr;
+    _arrayPhones = ptr;
     
-    if (v.size() != 0){
-         phoneMAX = v[0]; 
+    if (_size != 0){
+         _phoneMAX = v[0]; 
     }
 
+
     int j = 0;
-    for(int i = 0; i < v.size(); ++i){
+    for(int i = 0; i < _size; ++i){
         _arrel = insereix(_arrel, j, v[i].nom(), v[i]);
     }
    
-    indefinit = false;
 
-    int *ptrp = new int[size];
-    bool trobat;
-    string auxiliar;
+    int *ptrp = new int[_size];
     
-    for (unsigned int i = 0; i < size; ++i){
-        pref_curs = "";
-        trobat = false;
+    for (unsigned int i = 0; i < _size; ++i){
+        _indefinit = false;
+        bool trobat = false;
         phone ph;
         node* aux;
         F(_arrel, ph, aux);
         aux->_visitat = true;
-        auxiliar = ph.nom();
+        string auxiliar = ph.nom();
         
 
-        for (unsigned int j = 0; j <= arrayFreqs[i].nom().size() and not trobat; ++j){
-            if (auxiliar == arrayFreqs[i].nom()){
-                ptrp[i] = pref_curs.size();
+        for (unsigned int j = 0; j <= _arrayPhones[i].nom().size() and not trobat; ++j){
+            if (auxiliar == _arrayPhones[i].nom()){
+                ptrp[i] = _pref_curs.size();
                 trobat = true;
             }
             else{
-                if(pref_curs.size() == arrayFreqs[i].nom().size()){
-                    ptrp[i] = pref_curs.size() + 1;
+                if(_pref_curs.size() == _arrayPhones[i].nom().size()){
+                    ptrp[i] = _pref_curs.size() + 1;
                     trobat = true;
                 }
                 else{
-                    auxiliar = (this->seguent(arrayFreqs[i].nom()[j]));
+                    auxiliar = this->seguent(_arrayPhones[i].nom()[j]);
                 }
             }
             
         }
         
-        pref_curs = "";
-        indefinit = false;
-        sb = false;
-        fiprefZ = false;
+        _pref_curs = "";
+        _stringBuit = false;
+        _fiprefZ = false;
         resVisitat(_arrel);
 
     }
 
-    indefinit = true;
-    pulsacions = ptrp;
+    _indefinit = true;
+    _arrayPulsacions = ptrp;
 }
 
 //θ(s)
@@ -222,10 +221,10 @@ void easy_dial::resVisitat(node *pt) {
 
 //θ(s)
 string easy_dial::inici() throw(){
-    pref_curs = "";
-    indefinit = false;
-    sb = false;
-    fiprefZ = false;
+    _pref_curs = "";
+    _indefinit = false;
+    _stringBuit = false;
+    _fiprefZ = false;
     resVisitat(_arrel);
 
     if (_arrel != nullptr){
@@ -233,17 +232,15 @@ string easy_dial::inici() throw(){
         node* aux;
         F(_arrel, ph, aux);
         aux->_visitat = true;
-        phoneANT = ph;
+        _phoneANT = ph;
         return ph.nom();
-
-      
     }
 
     return "";
 }
 
 //θ(log l)
-void easy_dial::fistring(node *S, string p, node* &pt, int i){//i == 0
+void easy_dial::fistring(node *S, string p, node* &pt, int i){
     if (S != nullptr and i != p.size()){
         
         if (p[i] < S->_c){
@@ -255,9 +252,8 @@ void easy_dial::fistring(node *S, string p, node* &pt, int i){//i == 0
         else if (p[i] == S->_c){
             fistring(S->_cen, p, pt, i + 1);
         }
-       
-        
-        if (i == p.size() - 1 and p[p.size()-1] == S->_c ){
+         
+        if (i == p.size() - 1 and p[p.size()-1] == S->_c){
             pt = S;
         }
     }
@@ -285,49 +281,50 @@ void easy_dial::F(node* S, phone &ph, node *&aux) {
 string easy_dial::seguent(char c) throw(error){
     node *pt = nullptr;
 
-    if (indefinit){
+    if (_indefinit){
         throw error(ErrPrefixIndef);
     }
 
-    if (pref_curs != ""){
+    if (_pref_curs != ""){
 
         
-        fistring(_arrel, pref_curs, pt);
+        fistring(_arrel, _pref_curs, pt);
         if (c == '\0'){
             if (pt != nullptr and pt->_p.nom() != "" and not pt->_visitat){
-                phoneANT = pt->_p;
+                _phoneANT = pt->_p;
                 pt->_visitat = true;
-                fiprefZ = true;
+                _fiprefZ = true;
                 return pt->_p.nom();
             } 
         }
 
 
         if (pt == nullptr){
-            indefinit = true;
+            _indefinit = true;
         
             throw error(ErrPrefixIndef);
         }
     }
 
-    if (fiprefZ){
-        fiprefZ = false;
+    if (_fiprefZ){
+        _fiprefZ = false;
     }
 
-    pref_curs += c;
+    _pref_curs += c;
 
     pt = nullptr;
     
-    fistring(_arrel, pref_curs, pt);
+    fistring(_arrel, _pref_curs, pt);
     
-    if (pt == nullptr and (size == 0 or sb == true)){
-            indefinit = true;
-            throw error(ErrPrefixIndef);
+    if (pt == nullptr and (_size == 0 or _stringBuit == true)){
+        _indefinit = true;
+        throw error(ErrPrefixIndef);
     }
     else if (pt == nullptr){
-        sb = true;
+        _stringBuit = true;
         return ""; 
     }
+    
     
     node* aux = nullptr;
     phone ph;
@@ -342,19 +339,19 @@ string easy_dial::seguent(char c) throw(error){
     if (aux != nullptr and aux->_p.nom() != ""){
         aux->_visitat = true;
     }
-    else if (sb == false){
-        sb = true; 
+    else if (_stringBuit == false){
+        _stringBuit = true; 
         if (aux != nullptr){
             aux->_visitat = false;
         }
         return "";
     }
     else{
-        indefinit = true;
+        _indefinit = true;
         throw error(ErrPrefixIndef);
     }
 
-    phoneANT = ph;
+    _phoneANT = ph;
 
     return ph.nom();
 }
@@ -381,72 +378,72 @@ string easy_dial::anterior() throw(error){
     node *pt = nullptr; 
     node *minT = nullptr;
 
-    if (indefinit){
+    if (_indefinit){
         throw error(ErrPrefixIndef);
     }
 
-    if (pref_curs == ""){
-        if (phoneMAX == phoneANT){
-            indefinit = true;
+    if (_pref_curs == ""){
+        if (_phoneMAX == _phoneANT){
+            _indefinit = true;
             throw error(ErrNoHiHaAnterior);
         }  
         else{
-            phoneANT = phoneMAX;
-            return phoneMAX.nom();
+            _phoneANT = _phoneMAX;
+            return _phoneMAX.nom();
         } 
     }
 
-    fistring(_arrel, pref_curs, pt);
-    phone q = phoneMAX;
+    fistring(_arrel, _pref_curs, pt);
+    phone q = _phoneMAX;
     menorFreqT(pt, minT, q);
 
    
-    if (minT != nullptr and sb != true){
+    if (minT != nullptr and _stringBuit != true){
         minT->_visitat = false;
     }
 
     minT = nullptr;
    
-    if (fiprefZ){
-        fiprefZ = false;
+    if (_fiprefZ){
+        _fiprefZ = false;
     }
     else{
-        pref_curs.pop_back();
+        _pref_curs.pop_back();
     }
    
 
-    if (pref_curs == ""){
-        phone aux = phoneMAX;
+    if (_pref_curs == ""){
+        phone aux = _phoneMAX;
         menorFreqT(_arrel, minT, aux);
         if (minT != nullptr){
-            phoneANT = minT->_p;
+            _phoneANT = minT->_p;
             return minT->_p.nom();
         }
         else{
-            phoneANT = phoneMAX;
-            return phoneMAX.nom();
+            _phoneANT = _phoneMAX;
+            return _phoneMAX.nom();
         }
     }
 
-    fistring(_arrel, pref_curs, pt);
+    fistring(_arrel, _pref_curs, pt);
 
 
     if (pt == nullptr){   
-        indefinit = true;
+        _indefinit = true;
         throw error(ErrPrefixIndef);
     }
 
-    phone q2 = phoneMAX;
+    phone q2 = _phoneMAX;
     menorFreqT(pt, minT, q2);
 
-    sb = false;
+    _stringBuit = false;
 
     if (minT == nullptr){
-        phoneANT = phoneMAX;
-        return phoneMAX.nom();
+        _phoneANT = _phoneMAX;
+        return _phoneMAX.nom();
     }
 
-    phoneANT = minT->_p;
+    _phoneANT = minT->_p;
 
 
     return minT->_p.nom();
@@ -456,13 +453,13 @@ string easy_dial::anterior() throw(error){
 nat easy_dial::num_telf() const throw(error){
 
     
-    if (indefinit){
+    if (_indefinit){
         throw error(ErrPrefixIndef);
     }
     
     node *pt = nullptr;
 
-    fistring(_arrel, pref_curs, pt);
+    fistring(_arrel, _pref_curs, pt);
 
     if (pt == nullptr){
         throw error(ErrNoExisteixTelefon);
@@ -470,34 +467,34 @@ nat easy_dial::num_telf() const throw(error){
 
     phone ph;
     node *aux = nullptr;
-    if (phoneANT.nom() == ""){
+    if (_phoneANT.nom() == ""){
         F(pt->_cen, ph, aux);
     }
    
     
 
-    if (pref_curs == ""){
-        if(phoneMAX != phoneANT){
-            phone aux = phoneMAX;
+    if (_pref_curs == ""){
+        if(_phoneMAX != _phoneANT){
+            phone aux = _phoneMAX;
             node *minT = nullptr;
             menorFreqT(_arrel, minT, aux);
             if (minT != nullptr){
                 return minT->_p.numero();
             }
             else{
-                return phoneMAX.numero();
+                return _phoneMAX.numero();
             }   
         }
         else{
-            return phoneMAX.numero();
+            return _phoneMAX.numero();
         }
     }
 
-    if (aux == nullptr and phoneANT.nom() == ""){
+    if (aux == nullptr and _phoneANT.nom() == ""){
         throw error(ErrNoExisteixTelefon);
     }
-    if (sb == false){
-        return phoneANT.numero();
+    if (_stringBuit == false){
+        return _phoneANT.numero();
     }
     else{
         throw error(ErrNoExisteixTelefon);
@@ -594,21 +591,21 @@ void easy_dial::comencen(const string& pref, vector<string>& result) const throw
 double easy_dial::longitud_mitjana() const throw(){
     double sum = 0;
    
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < _size; i++) {
         
-        sum += arrayFreqs[i].frequencia();
+        sum += _arrayPhones[i].frequencia();
     }
 
-    double Pr[size];
+    double Pr[_size];
 
-    for (int i = 0; i < size; i++){
-        Pr[i] = arrayFreqs[i].frequencia() / sum;  
+    for (int i = 0; i < _size; i++){
+        Pr[i] = _arrayPhones[i].frequencia() / sum;  
     }
 
     double res = 0;
 
-    for (int i = 0; i < size; ++i){
-        res += (Pr[i] * pulsacions[i]);
+    for (int i = 0; i < _size; ++i){
+        res += (Pr[i] * _arrayPulsacions[i]);
     }
   
 

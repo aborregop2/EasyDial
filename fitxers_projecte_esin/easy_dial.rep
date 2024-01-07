@@ -13,15 +13,15 @@ struct node {
        node(const char &c, node* esq = nullptr, node* cen = nullptr, node* dre = nullptr, bool v = false) throw(error);
 };
      node* _arrel;
-     string pref_curs;
-     bool indefinit;
-     bool sb;
-     bool fiprefZ;
-     int size;
-     phone phoneMAX;
-     phone phoneANT;
-     phone *arrayFreqs;
-     int *pulsacions;
+     string _pref_curs; // String que acumula els caràcters introduïts per l'usuari
+     bool _indefinit; // Booleà que indica si l'String ha estat indefinit
+     bool _stringBuit;  //Booleà que indica si ja s'ha tret per pantalla l'string buit
+     bool _fiprefZ; // Booleà que indica si l'usuari ha possat el char '\0' (phone::ENDPREF)
+     int _size; // Variable que indica quants phone no buits hi ha al easy_dial
+     phone _phoneMAX; // Phone que emmagatzema el phone amb més freqüència
+     phone _phoneANT; // Phone que emmagatzema l'ultim phone suggerit a l'usuari
+     phone *_arrayPhones; // Array que emmagatzema tots els phones de l'easy_dial per ordre de freqüència
+     int *_arrayPulsacions; // Array que emmagatzema les pulsacions necessàries per arribar a un phone
 
 
      // Metode Copia
