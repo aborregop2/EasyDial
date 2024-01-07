@@ -79,8 +79,8 @@ easy_dial::node* easy_dial::insereix(node *t, nat i, const string &k, phone ph){
         }
     }
 
-    if (i == k.size()-1 and t != nullptr){
-        t->_p = ph;
+    if (i == k.size()-1 and t != nullptr and k[k.size()-1] == t->_c){
+        t->_p = ph;   
     }
     else if (t != nullptr and t->_p.nom() == ""){
         phone p;

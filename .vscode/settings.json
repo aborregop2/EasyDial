@@ -3,6 +3,8 @@
         "error": "cpp",
         "*.rep": "cpp",
         "xstring": "cpp",
-        "util": "cpp"
+        "util": "cpp",
+        "iostream": "cpp",
+        "gen_driver": "cpp"
     }
 }

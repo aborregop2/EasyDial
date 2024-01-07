@@ -74,8 +74,8 @@ jose
 ##jose 
 ##300
 #dialog "j"
-jose 
-300
+jose  No hi ha telefons amb el prefix en curs. 
+0
 ##jose  No hi ha telefons amb el prefix en curs. 
 ##0
 #dialog "m"
@@ -112,8 +112,8 @@ miguel maria
 ##miguel maria 
 ##301
 #dialog "ma"
-miguel maria 
-301
+miguel maria  No hi ha telefons amb el prefix en curs. 
+0
 ##miguel maria  No hi ha telefons amb el prefix en curs. 
 ##0
 #cc01 destroy
@@ -145,8 +145,8 @@ manuel maria
 ##manuel maria 
 ##301
 #dialog "ma"
-manuel maria 
-301
+manuel maria  No hi ha telefons amb el prefix en curs. 
+0
 ##manuel maria  No hi ha telefons amb el prefix en curs. 
 ##0
 #cc01 destroy
@@ -178,8 +178,8 @@ mar maria
 ##mar maria 
 ##301
 #dialog "ma"
-mar maria 
-301
+mar maria  No hi ha telefons amb el prefix en curs. 
+0
 ##mar maria  No hi ha telefons amb el prefix en curs. 
 ##0
 #cc01 destroy
@@ -211,8 +211,8 @@ maria mar
 ##maria mar 
 ##300
 #dialog "ma"
-maria mar 
-300
+maria mar  No hi ha telefons amb el prefix en curs. 
+0
 ##maria mar  No hi ha telefons amb el prefix en curs. 
 ##0
 #cc01 destroy
@@ -251,8 +251,8 @@ antonio victor
 ##antonio victor 
 ##302
 #dialog "a"
-antonio 
-300
+antonio  No hi ha telefons amb el prefix en curs. 
+0
 ##antonio  No hi ha telefons amb el prefix en curs. 
 ##0
 #cc01 destroy
@@ -281,8 +281,8 @@ sara
 ##sara 
 ##301
 #dialog "s"
-sara 
-301
+sara  No hi ha telefons amb el prefix en curs. 
+0
 ##sara  No hi ha telefons amb el prefix en curs. 
 ##0
 #dialog "v"
@@ -326,8 +326,8 @@ victor sara
 ##victor sara 
 ##301
 #dialog "v"
-victor 
-302
+victor  No hi ha telefons amb el prefix en curs. 
+0
 ##victor  No hi ha telefons amb el prefix en curs. 
 ##0
 #dialog "a"
@@ -682,5 +682,13 @@ maria maruchi marisol marisa mar
 #r 601
 #r 600
 #init easi03 easy_dial cc03
-Error::easy_dial:31:Prefix en curs indefinit.
 #dialog mi<aria<<<n<<<a
+jose manolo miguel manolo mari marisa marisol maria marisol marisa mari manoli mari manolo jose antonio 
+608
+##jose manolo miguel manolo mari marisa marisol maria marisol marisa mari manoli mari manolo jose antonio 
+##608
+###!
+#cc03 destroy
+#easi03 destroy
+###!
+###!

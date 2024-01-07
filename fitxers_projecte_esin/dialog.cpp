@@ -1,8 +1,7 @@
 #include "dialog.hpp"
 
-//θ(input.size())
 void dialog::dialog(easy_dial& easy, const string& input, vector<string>& answers, nat& numtelf) throw(){
-  
+ 
     string s = easy.inici();
     answers.push_back(s);
     if (s == ""){
@@ -27,7 +26,10 @@ void dialog::dialog(easy_dial& easy, const string& input, vector<string>& answer
         else{
           string s = easy.seguent(input[i]);
           if (s == ""){
+            answers.push_back(" No hi ha telefons amb el prefix en curs.");
+            numtelf = 0;
             easy.anterior();
+            break;
           }
           else{
             answers.push_back(s);
